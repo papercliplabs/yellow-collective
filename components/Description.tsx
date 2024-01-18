@@ -57,7 +57,7 @@ export default function Description() {
                         </p>
                         <p>
                             Here{"'"}s a fun video we made showing off all 55 inaugural heads, in the style of a cheesy
-                            90{"'"}s Toy Commercial:
+                            90{"'"}s Toy Commercial (because why not?):
                         </p>
                         <video controls className="rounded-3xl border-[4px] border-secondary">
                             <source src="/traits.mp4" />
