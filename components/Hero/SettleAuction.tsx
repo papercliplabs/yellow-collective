@@ -3,8 +3,9 @@ import { usePrepareContractWrite, useContractWrite, useWaitForTransaction, Addre
 import { AuctionABI } from "@buildersdk/sdk";
 import Button from "../Button";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useRouter } from "next/router";
 
-export const SettleAuction = ({ auction }: { auction?: string }) => {
+export const SettleAuction = ({ auction, onSettled }: { auction?: string; onSettled: () => void }) => {
     const { config } = usePrepareContractWrite({
         address: auction as Address,
         abi: AuctionABI,
@@ -12,17 +13,22 @@ export const SettleAuction = ({ auction }: { auction?: string }) => {
         enabled: !!auction,
     });
     const { write, data, isLoading: contractLoading } = useContractWrite(config);
-    const { isLoading: transactionLoading } = useWaitForTransaction({
+    const { isLoading: transactionLoading, isSuccess } = useWaitForTransaction({
         hash: data?.hash,
+        onSuccess: () => {
+            onSettled();
+            router.push("/");
+        },
     });
     const { isConnected } = useAccount();
     const { openConnectModal } = useConnectModal();
+    const router = useRouter();
 
     const isLoading = contractLoading || transactionLoading;
 
     return (
         <Button
-            onClick={() => {
+            onClick={async () => {
                 if (isConnected) {
                     write?.();
                 } else {

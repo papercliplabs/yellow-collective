@@ -6,9 +6,7 @@ import { compareAddress } from "@/utils/compareAddress";
 import { SettleAuction } from "./SettleAuction";
 import { PlaceBid } from "./PlaceBid";
 import { HighestBidder } from "./HighestBidder";
-import { Fragment, useMemo, useState } from "react";
-import { useTheme } from "@/hooks/useTheme";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
+import { Fragment, useEffect, useState } from "react";
 import { AuctionInfo } from "@/services/nouns-builder/auction";
 import { ContractInfo } from "@/services/nouns-builder/token";
 import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
@@ -21,7 +19,11 @@ import clsx from "clsx";
 
 export default function Hero() {
     const { data: contractInfo } = useContractInfo();
-    const { data: auctionInfo } = useCurrentAuctionInfo({
+    const {
+        data: auctionInfo,
+        mutate: mutateCurrentAuctionInfo,
+        isValidating,
+    } = useCurrentAuctionInfo({
         auctionContract: contractInfo?.auction,
     });
     const { query, push } = useRouter();
@@ -75,7 +77,12 @@ export default function Hero() {
                 <h1>{tokenInfo?.name || "Collective Nouns, ..."}</h1>
 
                 {tokenId === currentTokenId ? (
-                    <CurrentAuction auctionInfo={auctionInfo} contractInfo={contractInfo} tokenId={currentTokenId} />
+                    <CurrentAuction
+                        auctionInfo={auctionInfo}
+                        contractInfo={contractInfo}
+                        tokenId={currentTokenId}
+                        revalidateAuctionInfo={() => mutateCurrentAuctionInfo()}
+                    />
                 ) : (
                     <EndedAuction auctionContract={contractInfo?.auction} tokenId={tokenId} owner={tokenInfo?.owner} />
                 )}
@@ -126,12 +133,23 @@ const CurrentAuction = ({
     auctionInfo,
     contractInfo,
     tokenId,
+    revalidateAuctionInfo,
 }: {
     auctionInfo?: AuctionInfo;
     contractInfo?: ContractInfo;
     tokenId: string;
+    revalidateAuctionInfo: () => void;
 }) => {
-    const auctionOver = (auctionInfo?.endTime || 0) < Math.round(Date.now() / 1000);
+    const [auctionOver, setAuctionOver] = useState<boolean>(false);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const timeRemaining = Math.max((auctionInfo?.endTime || 0) - Math.round(Date.now() / 1000), 0);
+            setAuctionOver(timeRemaining == 0);
+        }, 1000);
+
+        return () => clearInterval(intervalId);
+    }, [auctionInfo]);
 
     const { data: ensName } = useEnsName({
         address: auctionInfo?.highestBidder,
@@ -158,13 +176,14 @@ const CurrentAuction = ({
                 </div>
             </div>
 
-            {(auctionInfo?.endTime || 0) < Math.round(Date.now() / 1000) ? (
-                <SettleAuction auction={contractInfo?.auction} />
+            {auctionOver ? (
+                <SettleAuction auction={contractInfo?.auction} onSettled={revalidateAuctionInfo} />
             ) : (
                 <PlaceBid
                     highestBid={auctionInfo?.highestBid || "0"}
                     auction={contractInfo?.auction}
                     tokenId={tokenId}
+                    onNewBid={revalidateAuctionInfo}
                 />
             )}
 

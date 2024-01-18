@@ -7,16 +7,18 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useTheme } from "@/hooks/useTheme";
 import Button from "../Button";
 import clsx from "clsx";
-import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 export const PlaceBid = ({
     highestBid,
     auction,
     tokenId,
+    onNewBid,
 }: {
     highestBid?: string;
     auction?: string;
     tokenId?: string;
+    onNewBid: () => void;
 }) => {
     const { isConnected } = useAccount();
     const [bid, setBid] = useState("");
@@ -37,6 +39,10 @@ export const PlaceBid = ({
     const { write, data } = useContractWrite(config);
     const { isLoading } = useWaitForTransaction({
         hash: data?.hash,
+        onSuccess: () => {
+            setBid("");
+            onNewBid();
+        },
     });
 
     const highestBidBN = BigNumber.from(highestBid);
