@@ -19,7 +19,11 @@ export default function Description() {
                             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
                             anim id est laborum.
                         </p>
-                        <div className="py-6">VIDEO</div>
+                        <div className="py-6">
+                            <video controls className="rounded-3xl border-[4px] border-secondary">
+                                <source src="/yellow-collective-intro-720.mov" />
+                            </video>
+                        </div>
                     </div>
                 </div>
             </div>

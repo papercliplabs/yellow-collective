@@ -17,6 +17,7 @@ import { shortenAddress } from "@/utils/shortenAddress";
 import UserAvatar from "../UserAvatar";
 import { useRouter } from "next/router";
 import Button from "../Button";
+import clsx from "clsx";
 
 export default function Hero() {
     const { data: contractInfo } = useContractInfo();
@@ -49,27 +50,17 @@ export default function Hero() {
         });
     };
 
-    console.log(tokenInfo?.image);
-
     return (
         <div className="bg-transparent max-w-[374px] md:max-w-[500px] lg:max-w-5xl flex flex-col justify-center items-center lg:flex-row lg:justify-between lg:items-start py-[48px] md:py-[64px] gap-8 md:gap-16 px-4 md:px-10">
-            <div className="h-[342px] w-[342px] md:w-[420px] md:h-[420px] relative shrink-0">
-                {tokenInfo && (
-                    <Image
-                        src={tokenInfo.image}
-                        onLoad={() => setImageLoaded(true)}
-                        fill={true}
-                        alt="logo"
-                        className="rounded-[64px] border-[3px] border-transparent/10"
-                    />
-                )}
-                <div
-                    className={`absolute top-0 right-0 h-[342px] w-[342px] md:w-[450px] md:h-[450px] hidden lg:flex items-center justify-around lg:pr-12 ${
-                        imageLoaded ? "invisible" : "visible"
-                    }`}
-                >
-                    <Image src={"/spinner.svg"} alt="spinner" width={30} height={30} />
-                </div>
+            <div className="h-[342px] w-[342px] md:w-[420px] md:h-[420px] relative shrink-0 rounded-[64px] border-[3px] border-transparent/10 overflow-hidden  flex justify-center items-center">
+                <Image
+                    src={tokenInfo?.image || ""}
+                    onLoad={() => setImageLoaded(true)}
+                    fill={true}
+                    alt=""
+                    className={clsx(tokenInfo && imageLoaded ? "visible" : "invisible")}
+                />
+                <Image src={"/spinner.svg"} alt="spinner" width={80} height={80} />
             </div>
             <div className="flex flex-col gap-6">
                 <div className="flex items-center mb-4 gap-4">
@@ -81,7 +72,7 @@ export default function Hero() {
                     </Button>
                 </div>
 
-                <h1>{tokenInfo?.name || "---"}</h1>
+                <h1>{tokenInfo?.name || "Collective Nouns, ..."}</h1>
 
                 {tokenId === currentTokenId ? (
                     <CurrentAuction auctionInfo={auctionInfo} contractInfo={contractInfo} tokenId={currentTokenId} />
@@ -111,7 +102,7 @@ const EndedAuction = ({
     });
 
     return (
-        <div className="flex flex-row justify-start w-full gap-12">
+        <div className="flex flex-col md:flex-row justify-start w-full gap-4 md:gap-12">
             <div className="flex flex-col gap-2">
                 <div className="font-light">Winning Bid</div>
                 <h3>{auctionData ? `Ξ ${utils.formatEther(auctionData.amount || "0")}` : "n/a"}</h3>
@@ -149,7 +140,7 @@ const CurrentAuction = ({
 
     return (
         <Fragment>
-            <div className="flex flex-row justify-start w-full gap-12">
+            <div className="flex flex-col md:flex-row justify-start w-full gap-4 md:gap-12">
                 <div className="flex flex-col gap-2">
                     <div className="font-light">{auctionOver ? "Winning Bid" : "Current Bid"}</div>
                     <h3>Ξ {utils.formatEther(auctionInfo?.highestBid || "0")}</h3>

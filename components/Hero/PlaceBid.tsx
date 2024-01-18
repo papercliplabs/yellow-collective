@@ -7,6 +7,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { useTheme } from "@/hooks/useTheme";
 import Button from "../Button";
 import clsx from "clsx";
+import { useAccountModal, useConnectModal } from "@rainbow-me/rainbowkit";
 
 export const PlaceBid = ({
     highestBid,
@@ -17,10 +18,11 @@ export const PlaceBid = ({
     auction?: string;
     tokenId?: string;
 }) => {
-    const { address } = useAccount();
+    const { isConnected } = useAccount();
     const [bid, setBid] = useState("");
     const debouncedBid = useDebounce(bid, 500);
-    const [theme] = useTheme();
+
+    const { openConnectModal } = useConnectModal();
 
     const { config, error } = usePrepareContractWrite({
         address: auction as Address,
@@ -50,8 +52,6 @@ export const PlaceBid = ({
         if (debouncedBid && debouncedBid < utils.formatEther(nextBidAmount)) return "Error invalid bid";
     };
 
-    console.log(getError());
-
     return (
         <div className="flex flex-row gap-4 items-start">
             <div>
@@ -68,10 +68,14 @@ export const PlaceBid = ({
                 {error && <p className=" text-negative">{getError()}</p>}
             </div>
             <Button
-                disabled={!write || isLoading}
+                disabled={(!write || isLoading) && isConnected}
                 onClick={(e) => {
                     e.preventDefault();
-                    write?.();
+                    if (isConnected) {
+                        write?.();
+                    } else {
+                        openConnectModal?.();
+                    }
                 }}
             >
                 {isLoading ? <Image src="/spinner.svg" height={24} width={24} alt="spinner" /> : "Place bid"}

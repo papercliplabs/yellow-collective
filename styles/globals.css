@@ -23,7 +23,7 @@
 
     html,
     body {
-        @apply w-screen;
+        @apply w-screen overflow-x-hidden;
     }
 
     h1 {

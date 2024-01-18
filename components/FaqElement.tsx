@@ -6,8 +6,8 @@ export default function FaqElement({ children, title }: { children: React.ReactN
         <Disclosure>
             {({ open }) => (
                 <>
-                    <Disclosure.Button className="">
-                        <div className={open ? "text-skin-highlighted" : ""}>{title}</div>
+                    <Disclosure.Button className="flex flex-row justify-between md:hover:bg-secondary md:p-4 rounded-2xl items-center">
+                        <h3>{title}</h3>
                         <ChevronDownIcon
                             className={`${
                                 open ? "rotate-180 transform" : ""
@@ -23,7 +23,7 @@ export default function FaqElement({ children, title }: { children: React.ReactN
                         leaveFrom="transform scale-100 opacity-100"
                         leaveTo="transform scale-95 opacity-0"
                     >
-                        <Disclosure.Panel>{children}</Disclosure.Panel>
+                        <Disclosure.Panel className="text-secondary md:px-4">{children}</Disclosure.Panel>
                     </Transition>
                 </>
             )}

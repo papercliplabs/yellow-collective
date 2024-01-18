@@ -22,13 +22,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             }}
         >
             <WagmiConfig client={wagmiClient}>
-                <RainbowKitProvider
-                    chains={chains}
-                    theme={lightTheme({
-                        accentColor: bg["muted"](100),
-                        accentColorForeground: text["base"](100),
-                    })}
-                >
+                <RainbowKitProvider chains={chains}>
                     <Component {...pageProps} />
                 </RainbowKitProvider>
             </WagmiConfig>
