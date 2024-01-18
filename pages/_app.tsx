@@ -34,7 +34,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                         />
                         <meta property="og:type" content="website" />
                         <meta property="og:url" content="https://yellowcollective.xyz" />
-                        <meta property="og:image" content={`https://${process.env.VERCEL_URL}/og-image.png`} />
+                        <meta
+                            property="og:image"
+                            content={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/og-image.png`}
+                        />
                     </Head>
                     <main className={`${pally.variable}`}>
                         <Component {...pageProps} />
