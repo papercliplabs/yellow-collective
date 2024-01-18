@@ -13,29 +13,26 @@ const bg = (fullConfig.theme?.backgroundColor as any).skin;
 const text = (fullConfig.theme?.textColor as any).skin;
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  useInitTheme();
+    useInitTheme();
 
-  return (
-    <SWRConfig
-      value={{
-        fetcher: (resource, init) =>
-          fetch(resource, init).then((res) => res.json()),
-      }}
-    >
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider
-          chains={chains}
-          theme={lightTheme({
-            accentColor: bg["muted"](100),
-            accentColorForeground: text["base"](100),
-          })}
+    return (
+        <SWRConfig
+            value={{
+                fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+            }}
         >
-          <div className="font-body">
-            <Component {...pageProps} />
-          </div>
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </SWRConfig>
-  );
+            <WagmiConfig client={wagmiClient}>
+                <RainbowKitProvider
+                    chains={chains}
+                    theme={lightTheme({
+                        accentColor: bg["muted"](100),
+                        accentColorForeground: text["base"](100),
+                    })}
+                >
+                    <Component {...pageProps} />
+                </RainbowKitProvider>
+            </WagmiConfig>
+        </SWRConfig>
+    );
 };
 export default MyApp;

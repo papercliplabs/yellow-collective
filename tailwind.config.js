@@ -18,6 +18,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        positive: "#198754",
+        warning: "#FFC107",
+        negative: "#DC3545",
         skin: {
           base: withOpacity("--color-text-base"),
           muted: withOpacity("--color-text-muted"),
@@ -25,6 +28,13 @@ module.exports = {
         },
       },
       textColor: {
+        primary: "#212529",
+        secondary: "#777B7F",
+        accent: {
+          DEFAULT: "#FBCB07",
+          blue: "#0786FB",
+          light: "#d2dcf9"
+        },
         skin: {
           base: withOpacity("--color-text-base"),
           muted: withOpacity("--color-text-muted"),
@@ -37,6 +47,14 @@ module.exports = {
         },
       },
       backgroundColor: {
+        primary: "#FFFFFF",
+        secondary: "#E9ECEF",
+        accent: {
+          DEFAULT: "#FBCB07",
+          blue: "#0786FB"
+        },
+        dark: "#222",
+        disabled: "#CED4DA",
         skin: {
           fill: withOpacity("--color-fill"),
           muted: withOpacity("--color-muted"),
@@ -51,6 +69,12 @@ module.exports = {
         },
       },
       borderColor: {
+        primary: "rgba(24, 24, 24, 0.10)",
+        secondary: "#E9ECEF",
+        accent: {
+          DEFAULT: "#0D6EFD",
+          light: "#C9DFFF"
+        },
         skin: {
           stroke: withOpacity("--color-stroke"),
         },
@@ -61,6 +85,7 @@ module.exports = {
         },
       },
       fontFamily: {
+        pally: ["pally", "sans-serif"],
         heading: ["var(--font-heading)", ...defaultTheme.fontFamily.sans],
         body: ["var(--font-body)", ...defaultTheme.fontFamily.sans],
       },

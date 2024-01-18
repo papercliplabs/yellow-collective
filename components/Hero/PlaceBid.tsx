@@ -1,99 +1,81 @@
 import { BigNumber, utils } from "ethers";
 import Image from "next/image";
 import { Fragment, useState } from "react";
-import {
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
-  useAccount,
-  Address,
-} from "wagmi";
+import { usePrepareContractWrite, useContractWrite, useWaitForTransaction, useAccount, Address } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useTheme } from "@/hooks/useTheme";
+import Button from "../Button";
+import clsx from "clsx";
 
 export const PlaceBid = ({
-  highestBid,
-  auction,
-  tokenId,
+    highestBid,
+    auction,
+    tokenId,
 }: {
-  highestBid?: string;
-  auction?: string;
-  tokenId?: string;
+    highestBid?: string;
+    auction?: string;
+    tokenId?: string;
 }) => {
-  const { address } = useAccount();
-  const [bid, setBid] = useState("");
-  const debouncedBid = useDebounce(bid, 500);
-  const [theme] = useTheme();
+    const { address } = useAccount();
+    const [bid, setBid] = useState("");
+    const debouncedBid = useDebounce(bid, 500);
+    const [theme] = useTheme();
 
-  const { config, error } = usePrepareContractWrite({
-    address: auction as Address,
-    abi: AuctionABI,
-    functionName: "createBid",
-    args: [BigNumber.from(tokenId || 1)],
-    overrides: {
-      value: utils.parseEther(debouncedBid || "0"),
-    },
-    enabled: !!auction && !!debouncedBid,
-  });
-  const { write, data } = useContractWrite(config);
-  const { isLoading } = useWaitForTransaction({
-    hash: data?.hash,
-  });
+    const { config, error } = usePrepareContractWrite({
+        address: auction as Address,
+        abi: AuctionABI,
+        functionName: "createBid",
+        args: [BigNumber.from(tokenId || 1)],
+        overrides: {
+            value: utils.parseEther(debouncedBid || "0"),
+        },
+        enabled: !!auction && !!debouncedBid,
+    });
+    const { write, data } = useContractWrite(config);
+    const { isLoading } = useWaitForTransaction({
+        hash: data?.hash,
+    });
 
-  const highestBidBN = BigNumber.from(highestBid);
-  const amountIncrease = highestBidBN.div("10");
-  const nextBidAmount = highestBidBN.add(amountIncrease);
+    const highestBidBN = BigNumber.from(highestBid);
+    const amountIncrease = highestBidBN.div("10");
+    const nextBidAmount = highestBidBN.add(amountIncrease);
 
-  const getError = () => {
-    if (!error?.message) return;
-    const message = error?.message;
+    const getError = () => {
+        const reason = (error as any)?.reason;
+        if (!reason) return "";
 
-    if (message.includes("insufficient funds"))
-      return "Error insufficent funds for bid";
+        if (reason.includes("insufficient funds")) return "Error insufficient funds for bid";
 
-    if (debouncedBid && debouncedBid < utils.formatEther(nextBidAmount))
-      return "Error invalid bid";
-  };
+        if (debouncedBid && debouncedBid < utils.formatEther(nextBidAmount)) return "Error invalid bid";
+    };
 
-  return (
-    <Fragment>
-      <div className="mt-12 sm:mt-6 flex flex-col sm:flex-row">
-        <input
-          value={bid}
-          type="number"
-          onChange={(e) => setBid(e.target.value)}
-          className="bg-skin-backdrop text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-2xl mr-2 focus:outline-none"
-          placeholder={
-            nextBidAmount ? `Ξ ${utils.formatEther(nextBidAmount)} or more` : ""
-          }
-        />
-        <button
-          disabled={!write}
-          onClick={(e) => {
-            e.preventDefault();
-            write?.();
-          }}
-          className={`bg-skin-button-accent ${
-            address
-              ? write
-                ? "bg-skin-button-accent transition ease-in-out hover:scale-110"
-                : "bg-skin-button-accent hover:bg-skin-button-accent-hover"
-              : "bg-skin-button-muted"
-          } text-skin-inverted rounded-lg text-xl w-full sm:h-auto h-12 mt-4 sm:mt-0 sm:w-40 flex items-center justify-around`}
-        >
-          {isLoading ? (
-            <Image src="/spinner.svg" height={24} width={24} alt="spinner" />
-          ) : (
-            <span>{theme.strings.placeBid || "Place bid"}</span>
-          )}
-        </button>
-      </div>
-      {error && (
-        <p className="w-96 h-auto break-words text-center mt-5 text-red-500">
-          {getError()}
-        </p>
-      )}
-    </Fragment>
-  );
+    console.log(getError());
+
+    return (
+        <div className="flex flex-row gap-4 items-start">
+            <div>
+                <input
+                    value={bid}
+                    type="number"
+                    onChange={(e) => setBid(e.target.value)}
+                    className={clsx(
+                        "bg-primary h-[59px] rounded-[18px] px-6 py-4 focus:border-accent border-2 outline-none",
+                        getError() != undefined && getError() != "" && "border-negative"
+                    )}
+                    placeholder={nextBidAmount ? `Ξ ${utils.formatEther(nextBidAmount)} or more` : ""}
+                />
+                {error && <p className=" text-negative">{getError()}</p>}
+            </div>
+            <Button
+                disabled={!write || isLoading}
+                onClick={(e) => {
+                    e.preventDefault();
+                    write?.();
+                }}
+            >
+                {isLoading ? <Image src="/spinner.svg" height={24} width={24} alt="spinner" /> : "Place bid"}
+            </Button>
+        </div>
+    );
 };
