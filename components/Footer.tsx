@@ -3,6 +3,7 @@ import NavigationItemComponent from "./NavigationItem";
 import Button from "./Button";
 import Image from "next/image";
 import Link from "next/link";
+import ExternalLink from "./ExternalLink";
 
 const navItems = [
     {
@@ -29,7 +30,7 @@ const navItems = [
 
 export default function Footer() {
     return (
-        <div className="flex justify-around pb-16 pt-4">
+        <div className="flex  pb-16 pt-4 flex-col justify-center items-center gap-16">
             <div className="flex flex-wrap items-center gap-4">
                 {navItems.map((item, i) => (
                     <Button variant="secondary" size="rounded" key={i}>
@@ -38,6 +39,9 @@ export default function Footer() {
                         </Link>
                     </Button>
                 ))}
+            </div>
+            <div className="caption text-secondary">
+                Made with ❤️ by <ExternalLink href="https://paperclip.xyz/">Paperclip Labs</ExternalLink>
             </div>
         </div>
     );

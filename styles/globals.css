@@ -46,7 +46,7 @@
     }
 
     .caption {
-        @apply text-[14px] leading-[16px] font-pt font-medium;
+        @apply text-[16px] leading-[18px] font-medium;
     }
 
     .clickable-active {

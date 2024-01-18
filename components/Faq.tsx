@@ -42,7 +42,7 @@ const faqItems: FaqItem[] = [
                         <ExternalLink href="https://x.com/benbodhi?s=21">Benbodhi</ExternalLink>
                     </li>
                     <li>
-                        <ExternalLink href="https://x.com/brettdrawsstuff?s=21">Brettdrawsstuff</ExternalLink>
+                        <ExternalLink href="https://x.com/brettdrawsstuff?s=21">BrettDrawsStuff</ExternalLink>
                     </li>
                     <li>
                         <ExternalLink href="https://x.com/jackwyldes?s=21">JackWyldes</ExternalLink>
@@ -54,13 +54,13 @@ const faqItems: FaqItem[] = [
                         <ExternalLink href="https://x.com/profwerder?s=21">Prof Werder</ExternalLink>
                     </li>
                     <li>
-                        <ExternalLink href="https://x.com/robotfishgirl?s=21">Robotfishgir</ExternalLink>
+                        <ExternalLink href="https://x.com/robotfishgirl?s=21">RobotFishGirl</ExternalLink>
                     </li>
                     <li>
                         <ExternalLink href="https://twitter.com/vellayan_0">Santhosh</ExternalLink>
                     </li>
                     <li>
-                        <ExternalLink href="https://x.com/supertightwoody?s=21">SuperTightWoodyl</ExternalLink>
+                        <ExternalLink href="https://x.com/supertightwoody?s=21">SuperTightWoody</ExternalLink>
                     </li>
                     <li>
                         <ExternalLink href="https://x.com/symbiotech?s=21">Symbiotech</ExternalLink>
