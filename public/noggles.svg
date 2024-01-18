@@ -1,34 +1,34 @@
 <svg width="81" height="30" viewBox="0 0 81 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.6" clip-path="url(#clip0_109_8)">
-<path d="M45.2041 0H15.2041V5H45.2041V0Z" fill="white"/>
-<path d="M80.2041 0H50.2041V5H80.2041V0Z" fill="white"/>
-<path d="M20.2041 5H15.2041V10H20.2041V5Z" fill="white"/>
-<path d="M40.2041 5H30.2041V10H40.2041V5Z" fill="white"/>
-<path d="M45.2041 5H40.2041V10H45.2041V5Z" fill="white"/>
-<path d="M55.2041 5H50.2041V10H55.2041V5Z" fill="white"/>
-<path d="M75.2041 5H65.2041V10H75.2041V5Z" fill="white"/>
-<path d="M80.2041 5H75.2041V10H80.2041V5Z" fill="white"/>
-<path d="M20.2041 10H0.204102V15H20.2041V10Z" fill="white"/>
-<path d="M40.2041 10H30.2041V15H40.2041V10Z" fill="white"/>
-<path d="M55.2041 10H40.2041V15H55.2041V10Z" fill="white"/>
-<path d="M75.2041 10H65.2041V15H75.2041V10Z" fill="white"/>
-<path d="M80.2041 10H75.2041V15H80.2041V10Z" fill="white"/>
-<path d="M5.2041 15H0.204102V20H5.2041V15Z" fill="white"/>
-<path d="M20.2041 15H15.2041V20H20.2041V15Z" fill="white"/>
-<path d="M40.2041 15H30.2041V20H40.2041V15Z" fill="white"/>
-<path d="M45.2041 15H40.2041V20H45.2041V15Z" fill="white"/>
-<path d="M55.2041 15H50.2041V20H55.2041V15Z" fill="white"/>
-<path d="M75.2041 15H65.2041V20H75.2041V15Z" fill="white"/>
-<path d="M80.2041 15H75.2041V20H80.2041V15Z" fill="white"/>
-<path d="M5.2041 20H0.204102V25H5.2041V20Z" fill="white"/>
-<path d="M20.2041 20H15.2041V25H20.2041V20Z" fill="white"/>
-<path d="M40.2041 20H30.2041V25H40.2041V20Z" fill="white"/>
-<path d="M45.2041 20H40.2041V25H45.2041V20Z" fill="white"/>
-<path d="M55.2041 20H50.2041V25H55.2041V20Z" fill="white"/>
-<path d="M75.2041 20H65.2041V25H75.2041V20Z" fill="white"/>
-<path d="M80.2041 20H75.2041V25H80.2041V20Z" fill="white"/>
-<path d="M45.2041 25H15.2041V30H45.2041V25Z" fill="white"/>
-<path d="M80.2041 25H50.2041V30H80.2041V25Z" fill="white"/>
+<g id="Frame" opacity="0.6" clip-path="url(#clip0_109_8)">
+<path id="Vector" d="M45.2041 0H15.2041V5H45.2041V0Z" fill="white"/>
+<path id="Vector_2" d="M80.2041 0H50.2041V5H80.2041V0Z" fill="white"/>
+<path id="Vector_3" d="M20.2041 5H15.2041V10H20.2041V5Z" fill="white"/>
+<path id="Vector_4" d="M30.2041 5H20.2041V10H30.2041V5Z" fill="white"/>
+<path id="Vector_5" d="M45.2041 5H40.2041V10H45.2041V5Z" fill="white"/>
+<path id="Vector_6" d="M55.2041 5H50.2041V10H55.2041V5Z" fill="white"/>
+<path id="Vector_7" d="M65.2041 5H55.2041V10H65.2041V5Z" fill="white"/>
+<path id="Vector_8" d="M80.2041 5H75.2041V10H80.2041V5Z" fill="white"/>
+<path id="Vector_9" d="M20.2041 10H0.204102V15H20.2041V10Z" fill="white"/>
+<path id="Vector_10" d="M30.2041 10H20.2041V15H30.2041V10Z" fill="white"/>
+<path id="Vector_11" d="M55.2041 10H40.2041V15H55.2041V10Z" fill="white"/>
+<path id="Vector_12" d="M65.2041 10H55.2041V15H65.2041V10Z" fill="white"/>
+<path id="Vector_13" d="M80.2041 10H75.2041V15H80.2041V10Z" fill="white"/>
+<path id="Vector_14" d="M5.2041 15H0.204102V20H5.2041V15Z" fill="white"/>
+<path id="Vector_15" d="M20.2041 15H15.2041V20H20.2041V15Z" fill="white"/>
+<path id="Vector_16" d="M30.2041 15H20.2041V20H30.2041V15Z" fill="white"/>
+<path id="Vector_17" d="M45.2041 15H40.2041V20H45.2041V15Z" fill="white"/>
+<path id="Vector_18" d="M55.2041 15H50.2041V20H55.2041V15Z" fill="white"/>
+<path id="Vector_19" d="M65.2041 15H55.2041V20H65.2041V15Z" fill="white"/>
+<path id="Vector_20" d="M80.2041 15H75.2041V20H80.2041V15Z" fill="white"/>
+<path id="Vector_21" d="M5.2041 20H0.204102V25H5.2041V20Z" fill="white"/>
+<path id="Vector_22" d="M20.2041 20H15.2041V25H20.2041V20Z" fill="white"/>
+<path id="Vector_23" d="M30.2041 20H20.2041V25H30.2041V20Z" fill="white"/>
+<path id="Vector_24" d="M45.2041 20H40.2041V25H45.2041V20Z" fill="white"/>
+<path id="Vector_25" d="M55.2041 20H50.2041V25H55.2041V20Z" fill="white"/>
+<path id="Vector_26" d="M65.2041 20H55.2041V25H65.2041V20Z" fill="white"/>
+<path id="Vector_27" d="M80.2041 20H75.2041V25H80.2041V20Z" fill="white"/>
+<path id="Vector_28" d="M45.2041 25H15.2041V30H45.2041V25Z" fill="white"/>
+<path id="Vector_29" d="M80.2041 25H50.2041V30H80.2041V25Z" fill="white"/>
 </g>
 <defs>
 <clipPath id="clip0_109_8">

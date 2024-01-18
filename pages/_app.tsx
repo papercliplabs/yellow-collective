@@ -4,13 +4,14 @@ import { WagmiConfig } from "wagmi";
 import { wagmiClient, chains } from "../configs/wallet";
 import { RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";
 import { SWRConfig } from "swr";
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config.js";
 import { useInitTheme } from "@/hooks/useInitTheme";
+import localFont from "@next/font/local";
 
-const fullConfig = resolveConfig(tailwindConfig);
-const bg = (fullConfig.theme?.backgroundColor as any).skin;
-const text = (fullConfig.theme?.textColor as any).skin;
+const pally = localFont({
+    src: "../styles/Pally-Variable.ttf",
+    display: "swap",
+    variable: "--font-pally",
+});
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     useInitTheme();
@@ -23,7 +24,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         >
             <WagmiConfig client={wagmiClient}>
                 <RainbowKitProvider chains={chains}>
-                    <Component {...pageProps} />
+                    <main className={`${pally.variable}`}>
+                        <Component {...pageProps} />
+                    </main>
                 </RainbowKitProvider>
             </WagmiConfig>
         </SWRConfig>

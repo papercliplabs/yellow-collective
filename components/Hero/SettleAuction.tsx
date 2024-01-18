@@ -37,11 +37,7 @@ export const SettleAuction = ({ auction, onSettled }: { auction?: string; onSett
             }}
             disabled={isLoading}
         >
-            {isLoading ? (
-                <Image src="/spinner.svg" height={26} width={26} alt="spinner" />
-            ) : (
-                <span>Settle Auction</span>
-            )}
+            {isLoading ? <Image src="/spinner.svg" height={26} width={26} alt="spinner" /> : "Settle Auction"}
         </Button>
     );
 };

@@ -16,6 +16,7 @@
     "@mantine/core": "^5.10.0",
     "@mantine/hooks": "^5.10.0",
     "@mantine/rte": "^5.10.0",
+    "@next/font": "^14.0.4",
     "@radix-ui/react-slot": "^1.0.2",
     "@rainbow-me/rainbowkit": "^0.12.15",
     "@types/node": "18.11.9",
