@@ -24,7 +24,7 @@ export default function Description() {
                             .
                         </p>
                         <video controls className="rounded-3xl border-[4px] border-secondary">
-                            <source src="/yellow-collective-intro-720.mov" />
+                            <source src="/yellow-collective-intro-720.mov#t=0.001" />
                         </video>
                         <p>
                             Members of The Yellow Collective will coordinate onchain using{" "}
@@ -65,7 +65,7 @@ export default function Description() {
                             90{"'"}s Toy Commercial (because why not?)
                         </p>
                         <video controls className="rounded-3xl border-[4px] border-secondary">
-                            <source src="/traits.mp4" />
+                            <source src="/traits.mp4#t=0.001" />
                         </video>
                     </div>
                 </div>
