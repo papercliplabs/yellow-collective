@@ -19,16 +19,10 @@ import clsx from "clsx";
 
 export default function Hero() {
     const { data: contractInfo } = useContractInfo();
-    const {
-        data: auctionInfo,
-        mutate: mutateCurrentAuctionInfo,
-        isValidating,
-    } = useCurrentAuctionInfo({
+    const { data: auctionInfo, mutate: mutateCurrentAuctionInfo } = useCurrentAuctionInfo({
         auctionContract: contractInfo?.auction,
     });
     const { query, push } = useRouter();
-
-    console.log("VAL", isValidating);
 
     const currentTokenId = auctionInfo ? auctionInfo?.tokenId : "";
 
