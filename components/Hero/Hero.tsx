@@ -10,12 +10,12 @@ import { Fragment, useEffect, useState } from "react";
 import { AuctionInfo } from "@/services/nouns-builder/auction";
 import { ContractInfo } from "@/services/nouns-builder/token";
 import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
-import { useEnsName } from "wagmi";
 import { shortenAddress } from "@/utils/shortenAddress";
 import UserAvatar from "../UserAvatar";
 import { useRouter } from "next/router";
 import Button from "../Button";
 import clsx from "clsx";
+import useEnsName from "@/hooks/useEnsName";
 
 export default function Hero() {
     const { data: contractInfo } = useContractInfo();
@@ -109,14 +109,11 @@ const EndedAuction = ({
     const { data } = usePreviousAuctions({ auctionContract });
     const auctionData = data?.find((auction) => compareAddress(auction.tokenId, tokenId || ""));
 
-    const { data: ensName } = useEnsName({
-        address: owner,
-        chainId: 1,
-    });
+    const ensName = useEnsName(owner);
 
     return (
-        <div className="flex flex-col md:flex-row justify-start w-full gap-4 md:gap-12">
-            <div className="flex flex-col gap-2">
+        <div className="flex flex-col md:flex-row md:flex-wrap justify-start w-full gap-4 md:gap-12">
+            <div className="flex flex-col gap-2 shrink-0">
                 <div className="font-light">Winning Bid</div>
                 <h3>{auctionData ? `Ξ ${utils.formatEther(auctionData.amount || "0")}` : "n/a"}</h3>
             </div>
@@ -157,14 +154,11 @@ const CurrentAuction = ({
         return () => clearInterval(intervalId);
     }, [auctionInfo]);
 
-    const { data: ensName } = useEnsName({
-        address: auctionInfo?.highestBidder,
-        chainId: 1,
-    });
+    const ensName = useEnsName(auctionInfo?.highestBidder);
 
     return (
         <Fragment>
-            <div className="flex flex-row md:justify-start w-full gap-8 md:gap-12">
+            <div className="flex flex-row flex-wrap md:justify-start w-full gap-8 md:gap-12">
                 <div className="flex flex-col gap-2">
                     <div className="font-light">{auctionOver ? "Winning Bid" : "Current Bid"}</div>
                     <h3>Ξ {utils.formatEther(auctionInfo?.highestBid || "0")}</h3>

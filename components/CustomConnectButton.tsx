@@ -1,13 +1,19 @@
 import { useTheme } from "@/hooks/useTheme";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Button from "./Button";
+import { useAccount } from "wagmi";
+import useEnsName from "@/hooks/useEnsName";
+import useEnsAvatar from "@/hooks/useEnsAvatar";
+import Image from "next/image";
 
 export type CustomConnectButtonProps = {
     className: string;
 };
 
 const CustomConnectButton = ({ className }: CustomConnectButtonProps) => {
-    const [theme] = useTheme();
+    const { address } = useAccount();
+    const ensName = useEnsName(address);
+    const ensAvatar = useEnsAvatar(address);
 
     return (
         <ConnectButton.Custom>
@@ -40,8 +46,17 @@ const CustomConnectButton = ({ className }: CustomConnectButtonProps) => {
                                 );
                             }
                             return (
-                                <Button variant="secondary" onClick={openAccountModal}>
-                                    {account.displayName}
+                                <Button variant="secondary" onClick={openAccountModal} className="flex flex-row gap-2">
+                                    {ensAvatar && (
+                                        <Image
+                                            src={ensAvatar}
+                                            width={24}
+                                            height={24}
+                                            alt=""
+                                            className="rounded-full hidden md:block"
+                                        />
+                                    )}
+                                    <h6>{ensName ?? account.displayName}</h6>
                                 </Button>
                             );
                         })()}
