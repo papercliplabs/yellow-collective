@@ -39,9 +39,9 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-    appName: "My RainbowKit App",
+    appName: "Yellow Collective",
     chains,
-    projectId: "12fcc83f53d043bf4282e8233ef1aad7",
+    projectId: "afb449b5b1ea52d11db1ec72bc452500",
 });
 
 const wagmiClient = createClient({

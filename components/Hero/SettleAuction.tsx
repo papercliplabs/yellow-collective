@@ -4,8 +4,9 @@ import { AuctionABI } from "@buildersdk/sdk";
 import Button from "../Button";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
+import { track } from "@vercel/analytics";
 
-export const SettleAuction = ({ auction, onSettled }: { auction?: string; onSettled: () => void }) => {
+export const SettleAuction = ({ auction, onSettled }: { auction?: string; onSettled: () => Promise<void> }) => {
     const { config } = usePrepareContractWrite({
         address: auction as Address,
         abi: AuctionABI,
@@ -15,10 +16,15 @@ export const SettleAuction = ({ auction, onSettled }: { auction?: string; onSett
     const { write, data, isLoading: contractLoading } = useContractWrite(config);
     const { isLoading: transactionLoading, isSuccess } = useWaitForTransaction({
         hash: data?.hash,
-        onSuccess: () => {
-            onSettled();
-            router.push("/");
+        onError: () => {
+            track("settleAuctionError");
         },
+        onSuccess: () => {
+            track("settleAuctionSuccess");
+            onSettled().then(() => router.push("/"));
+            // ;
+        },
+        confirmations: 4,
     });
     const { isConnected } = useAccount();
     const { openConnectModal } = useConnectModal();
@@ -30,6 +36,7 @@ export const SettleAuction = ({ auction, onSettled }: { auction?: string; onSett
         <Button
             onClick={async () => {
                 if (isConnected) {
+                    track("settleAuctionTriggered");
                     write?.();
                 } else {
                     openConnectModal?.();

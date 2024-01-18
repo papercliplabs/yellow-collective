@@ -8,6 +8,7 @@ import { useTheme } from "@/hooks/useTheme";
 import Button from "../Button";
 import clsx from "clsx";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { track } from "@vercel/analytics";
 
 export const PlaceBid = ({
     highestBid,
@@ -39,7 +40,11 @@ export const PlaceBid = ({
     const { write, data } = useContractWrite(config);
     const { isLoading } = useWaitForTransaction({
         hash: data?.hash,
+        onError: () => {
+            track("placeBidError");
+        },
         onSuccess: () => {
+            track("placeBidSuccess");
             setBid("");
             onNewBid();
         },
@@ -59,8 +64,8 @@ export const PlaceBid = ({
     };
 
     return (
-        <div className="flex flex-row gap-4 items-start">
-            <div>
+        <div className="flex flex-row flex-wrap gap-4 items-start">
+            <div className="shrink">
                 <input
                     value={bid}
                     type="number"
@@ -78,6 +83,7 @@ export const PlaceBid = ({
                 onClick={(e) => {
                     e.preventDefault();
                     if (isConnected) {
+                        track("placeBidTriggered");
                         write?.();
                     } else {
                         openConnectModal?.();

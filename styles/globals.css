@@ -7,11 +7,12 @@
 @layer base {
     * {
         @apply font-pally antialiased;
+        font-synthesis: none !important;
     }
 
     html,
     body {
-        @apply w-screen overflow-x-hidden;
+        @apply w-screen overflow-x-hidden text-primary;
     }
 
     h1 {

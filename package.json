@@ -22,6 +22,8 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "@vercel/analytics": "^1.1.2",
+    "@vercel/og": "^0.6.2",
     "@wagmi/chains": "^1.7.0",
     "@zoralabs/zdk": "^2.2.0",
     "axios": "^1.2.0",

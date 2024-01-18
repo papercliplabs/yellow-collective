@@ -1,12 +1,8 @@
 import Image from "next/image";
-import { useContractInfo, useDAOAddresses, useTreasuryBalance, useTheme } from "hooks";
-import NavigationItemsComponent from "./NavigationItem";
+import { useDAOAddresses, useTreasuryBalance } from "hooks";
 import Link from "next/link";
 import { ETHERSCAN_BASEURL } from "constants/urls";
 import CustomConnectButton from "./CustomConnectButton";
-import { Bars3Icon } from "@heroicons/react/20/solid";
-import MobileMenu from "./MobileMenu";
-import { Fragment, useState } from "react";
 import { TOKEN_CONTRACT } from "constants/addresses";
 import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
 import Button from "./Button";
@@ -21,11 +17,11 @@ export default function Header() {
 
     return (
         <div className="flex items-center justify-between w-full px-4 md:px-10 py-2 h-[80px] gap-2">
-            <div className="flex flex-row gap-2 md:gap-8 justify-start items-center">
+            <div className="flex flex-row gap-4 md:gap-8 justify-start items-center">
                 <Link href="/">
                     <Image src="/noggles.svg" width={80} height={30} alt="Yellow" />
                 </Link>
-                <Button variant="outline">
+                <Button variant="outline" size="tight">
                     <Link
                         href={`${ETHERSCAN_BASEURL}/tokenholdings?a=${addresses?.treasury}`}
                         rel="noreferer noopener noreferrer"

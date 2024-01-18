@@ -23,13 +23,13 @@ const navItems = [
     },
     {
         href: "https://warpcast.com/~/channel/yellow",
-        src: "/youtube.svg",
+        src: "/farcaster.svg",
     },
 ];
 
 export default function Footer() {
     return (
-        <div className="flex justify-around pb-16">
+        <div className="flex justify-around pb-16 pt-4">
             <div className="flex flex-wrap items-center gap-4">
                 {navItems.map((item, i) => (
                     <Button variant="secondary" size="rounded" key={i}>

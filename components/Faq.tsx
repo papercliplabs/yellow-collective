@@ -19,12 +19,12 @@ const faqItems: FaqItem[] = [
                     Collection will always feel fresh and community-curated!
                 </p>
                 <p>
-                    On a related note, several times per year, the Collective may take a community poll to choose the
-                    TOP TRAIT added to the collection during that period and make a Proposal to have this trait
-                    “Graduated” to the OG Nouns collection, pending governance approval. In this way, artists from our
-                    community will have the opportunity by winning a Yellow Collective Trait contest, to have their art
-                    featured not only in the coolest Nounish project on BASE, but also in the most evergreen NFT DAO
-                    collection on ETH mainnet-- Nouns DAO.
+                    On a related note, several times per year, the Collective may also take a community poll to choose
+                    the TOP TRAIT added to the collection during that period and make a Proposal to have this trait
+                    “Graduated” to the OG Nouns collection, pending Nouns governance approval. In this way, artists from
+                    our community will have the opportunity, by winning a Yellow Collective Trait contest, to have their
+                    art featured not only in the coolest Nounish project on BASE, but also in the most evergreen NFT DAO
+                    collection on ETH mainnet- Nouns DAO!
                 </p>
             </>
         ),
@@ -35,33 +35,56 @@ const faqItems: FaqItem[] = [
             <>
                 <p>
                     The Yellow Collective was founded by the core team behind The Noun Square, the Collective Nounders
-                    (alphebetically):
+                    (alphabetically):
                 </p>
                 <ul className="list-disc list-inside pl-4">
-                    <li>Benbodhi</li>
-                    <li>Brettdrawsstuff</li>
-                    <li>JackWyldes</li>
-                    <li>Joshua Fisher</li>
-                    <li>Prof Werder</li>
-                    <li>Robotfishgir</li>
-                    <li>Santhosh</li>
-                    <li>SuperTightWoodyl</li>
-                    <li>Symbiotech</li>
-                    <li>Toady Hawk</li>
-                    <li>Xargs</li>
+                    <li>
+                        <ExternalLink href="https://x.com/benbodhi?s=21">Benbodhi</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/brettdrawsstuff?s=21">Brettdrawsstuff</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/jackwyldes?s=21">JackWyldes</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/joshuafisher?s=21">Joshua Fisher</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/profwerder?s=21">Prof Werder</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/robotfishgirl?s=21">Robotfishgir</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://twitter.com/vellayan_0">Santhosh</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/supertightwoody?s=21">SuperTightWoodyl</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/symbiotech?s=21">Symbiotech</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://twitter.com/toady_hawk">Toady Hawk</ExternalLink>
+                    </li>
+                    <li>
+                        <ExternalLink href="https://x.com/mamaxargs?s=21">Xargs</ExternalLink>
+                    </li>
                 </ul>
                 <p>
-                    In the combined experienced opinions of the Collective Nounders, many DAOs and DAO-like
-                    organisations have failed in recent years because of a lack of cohesion and guidance in the early
-                    days of their growth. To ensure that TYC embarks on the desired path and remains laser focused on
-                    the mission of supporting and empowering artists and creatives in our ecosystem, the Collective
-                    Nounders will not hesitate to employ social pressure, governance leadership and, if necessary, a
-                    Veto power, to ensure that the early direction is not compromised. They do however envision a near
-                    future wherein these responsibilities can be progressively decentralised to the community.
+                    In the experienced opinions of the Collective Nounders, many DAOs and DAO-like organisations have
+                    failed in recent years because of a lack of cohesion and guidance in the important early days of
+                    their growth. They won{"'"}t let that happen to Yellow. To ensure that TYC embarks on the desired
+                    path and remains laser focused on the mission of supporting and empowering artists and creatives in
+                    our ecosystem, the Collective Nounders will not hesitate to employ social pressure, governance
+                    leadership and, if necessary, Veto Power, to ensure that this early direction is not compromised.
+                    They do however envision a near future wherein these responsibilities can be progressively
+                    decentralised to the community in due time. Purple DAO is a great example of this in practice.
                 </p>
                 <p>
-                    A Collective Noun is not a claim on whatever treasury may accrue, it is a membership in an onchain
-                    club.
+                    A Collective Noun is not a claim on whatever treasury may accrue, it is a membership in (the
+                    coolest) onchain club.
                 </p>
             </>
         ),
@@ -71,15 +94,24 @@ const faqItems: FaqItem[] = [
         content: (
             <>
                 <p>
-                    Every 10th Collective Noun will go to the Collective Nounder wallet as an incentive-aligning founder
-                    reward.
+                    Every 10th Collective Noun will go to the Collective Nounder wallet as an incentive-aligning
+                    founders{"'"} reward.
                 </p>
                 <p>
                     Every 11th Collective Noun will go to the Collective Noun treasury. These Nouns will be earmarked as
                     prizes for Art Contests, as well as periodic Raffle Prizes for minters of TNS{" "}
-                    <ExternalLink href="https://nomo.wtf">NOMO Nouns </ExternalLink> (as a way to potentially allow for
-                    a lower cost entry to TYC for any of our global community members who may feel priced out by the
-                    Daily auction.)
+                    <ExternalLink href="https://nomo.wtf">NOMO Nouns</ExternalLink> (as a way to allow for a potential
+                    lower-cost entry to TYC for any of our global community members who may feel priced out by the Daily
+                    Auction.)
+                </p>
+                <p>
+                    After Token #10 is minted, 2 proposals will be made to 1{")"} Airdrop a founding team allocation of
+                    1 token each (11 total) to the Collective Nounders, and 2{")"} Turn on the 10 allocation for Prizes
+                    as mentioned above. These will only be turned on after 10 tokens so as not to interfere with the fun
+                    and mystique of the first 10 auctions by laying claim to all the early tokens for allocations. TYC
+                    is setting this expectation here in advance of launch as part of our implied tokenomics, and
+                    appreciate in advance the pledged support of these initiatives from any member who joins the club
+                    with tokens 1 through 10.
                 </p>
             </>
         ),
@@ -121,7 +153,7 @@ export default function Faq() {
             <div className="bg-white w-full flex justify-center py-8 flex-col items-center">
                 <div className="max-w-[754px] px-6 w-full flex flex-col gap-8 [&>p]:text-secondary bg-white">
                     <h2 className="md:px-4 pt-8">More Info:</h2>
-                    <div className="flex flex-col gap-4 w-full">
+                    <div className="flex flex-col gap-8 md:gap-4 w-full">
                         {faqItems.map((item, i) => (
                             <FaqElement title={item.title} key={i}>
                                 {item.content}

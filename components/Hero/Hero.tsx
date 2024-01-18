@@ -19,10 +19,16 @@ import clsx from "clsx";
 
 export default function Hero() {
     const { data: contractInfo } = useContractInfo();
-    const { data: auctionInfo, mutate: mutateCurrentAuctionInfo } = useCurrentAuctionInfo({
+    const {
+        data: auctionInfo,
+        mutate: mutateCurrentAuctionInfo,
+        isValidating,
+    } = useCurrentAuctionInfo({
         auctionContract: contractInfo?.auction,
     });
     const { query, push } = useRouter();
+
+    console.log("VAL", isValidating);
 
     const currentTokenId = auctionInfo ? auctionInfo?.tokenId : "";
 
@@ -50,7 +56,7 @@ export default function Hero() {
 
     return (
         <div className="bg-transparent max-w-[374px] md:max-w-[500px] lg:max-w-5xl flex flex-col justify-center items-center lg:flex-row lg:justify-between lg:items-start py-[48px] md:py-[64px] gap-8 md:gap-16 px-4 md:px-10">
-            <div className="h-[342px] w-[342px] md:w-[420px] md:h-[420px] relative shrink-0 rounded-[64px] border-[3px] border-transparent/10 overflow-hidden  flex justify-center items-center">
+            <div className="h-[342px] w-[342px] md:w-[420px] md:h-[420px] relative shrink-0 rounded-[48px] md:rounded-[64px] border-[3px] border-transparent/10 overflow-hidden  flex justify-center items-center">
                 {tokenInfo && (
                     <Image
                         src={tokenInfo?.image}
@@ -84,7 +90,10 @@ export default function Hero() {
                         auctionInfo={auctionInfo}
                         contractInfo={contractInfo}
                         tokenId={currentTokenId}
-                        revalidateAuctionInfo={() => mutateCurrentAuctionInfo()}
+                        revalidateAuctionInfo={async () => {
+                            await mutateCurrentAuctionInfo();
+                            return;
+                        }}
                     />
                 ) : (
                     <EndedAuction auctionContract={contractInfo?.auction} tokenId={tokenId} owner={tokenInfo?.owner} />
@@ -141,7 +150,7 @@ const CurrentAuction = ({
     auctionInfo?: AuctionInfo;
     contractInfo?: ContractInfo;
     tokenId: string;
-    revalidateAuctionInfo: () => void;
+    revalidateAuctionInfo: () => Promise<void>;
 }) => {
     const [auctionOver, setAuctionOver] = useState<boolean>(false);
 
@@ -161,7 +170,7 @@ const CurrentAuction = ({
 
     return (
         <Fragment>
-            <div className="flex flex-col md:flex-row justify-start w-full gap-4 md:gap-12">
+            <div className="flex flex-row md:justify-start w-full gap-8 md:gap-12">
                 <div className="flex flex-col gap-2">
                     <div className="font-light">{auctionOver ? "Winning Bid" : "Current Bid"}</div>
                     <h3>Ξ {utils.formatEther(auctionInfo?.highestBid || "0")}</h3>
