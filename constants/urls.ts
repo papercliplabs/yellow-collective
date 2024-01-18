@@ -11,3 +11,5 @@ export const ETHERSCAN_BASEURL = {
 
 export const ETHER_ACTOR_BASEURL = "https://ether.actor";
 export const IPFS_GATEWAY = process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://gateway.pinata.cloud/ipfs/";
+
+export const FARCASTER_URL = "https://warpcast.com/~/channel/yellow";

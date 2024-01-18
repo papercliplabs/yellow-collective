@@ -5,20 +5,8 @@
 @tailwind utilities;
 
 @layer base {
-    @font-face {
-        font-family: "pally";
-        src: url("./Pally-Variable.ttf") format("truetype");
-        font-weight: normal;
-    }
-
-    @font-face {
-        font-family: "pally";
-        src: url("./Pally-Variable.ttf") format("truetype");
-        font-weight: bold;
-    }
-
     * {
-        @apply font-pally;
+        @apply font-pally antialiased;
     }
 
     html,

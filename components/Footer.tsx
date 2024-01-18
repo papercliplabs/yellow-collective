@@ -6,19 +6,23 @@ import Link from "next/link";
 
 const navItems = [
     {
-        href: "TODO",
+        href: "https://www.tiktok.com/@thenounsquare",
         src: "/tiktok.svg",
     },
     {
-        href: "TODO",
+        href: "https://www.instagram.com/thenounsquare",
         src: "/instagram.svg",
     },
     {
-        href: "TODO",
+        href: "https://twitter.com/thenounsquare",
         src: "/x.svg",
     },
     {
-        href: "TODO",
+        href: "https://www.youtube.com/channel/UC1Iqmi7SCEzWlWP-huyh9xw",
+        src: "/youtube.svg",
+    },
+    {
+        href: "https://warpcast.com/~/channel/yellow",
         src: "/youtube.svg",
     },
 ];

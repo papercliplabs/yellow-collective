@@ -48,8 +48,6 @@ export default function Hero() {
         });
     };
 
-    console.log("TEST", tokenInfo, imageLoaded);
-
     return (
         <div className="bg-transparent max-w-[374px] md:max-w-[500px] lg:max-w-5xl flex flex-col justify-center items-center lg:flex-row lg:justify-between lg:items-start py-[48px] md:py-[64px] gap-8 md:gap-16 px-4 md:px-10">
             <div className="h-[342px] w-[342px] md:w-[420px] md:h-[420px] relative shrink-0 rounded-[64px] border-[3px] border-transparent/10 overflow-hidden  flex justify-center items-center">
@@ -79,7 +77,7 @@ export default function Hero() {
                     </Button>
                 </div>
 
-                <h1>{tokenInfo?.name || "Collective Nouns, ..."}</h1>
+                <h1>Collective Noun #{parseInt(tokenId, 16)}</h1>
 
                 {tokenId === currentTokenId ? (
                     <CurrentAuction
