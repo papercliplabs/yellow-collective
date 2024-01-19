@@ -110,5 +110,5 @@ export const CountdownDisplay: React.FC<CountdownDisplayProps> = (props: Countdo
             }
             return `${lastString} ${number}${postfix}`;
         }, "");
-    return <Fragment>{timeString || "0s"}</Fragment>;
+    return <h3>{timeString || "0s"}</h3>;
 };

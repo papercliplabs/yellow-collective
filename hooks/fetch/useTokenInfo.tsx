@@ -3,7 +3,7 @@ import { TOKEN_CONTRACT } from "constants/addresses";
 import useSWR from "swr";
 
 export const useTokenInfo = ({ tokenId }: { tokenId?: string }) => {
-  return useSWR<TokenInfo>(
-    tokenId ? `/api/token/${TOKEN_CONTRACT}/${tokenId}` : undefined
-  );
+    return useSWR<TokenInfo>(tokenId ? `/api/token/${TOKEN_CONTRACT}/${tokenId}` : undefined, null, {
+        refreshInterval: 2000,
+    });
 };

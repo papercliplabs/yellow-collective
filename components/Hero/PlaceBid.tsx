@@ -1,25 +1,27 @@
 import { BigNumber, utils } from "ethers";
 import Image from "next/image";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction, useAccount, Address } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
 import { useDebounce } from "@/hooks/useDebounce";
-import { useTheme } from "@/hooks/useTheme";
 import Button from "../Button";
 import clsx from "clsx";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { track } from "@vercel/analytics";
+import ExternalLink from "../ExternalLink";
 
 export const PlaceBid = ({
     highestBid,
     auction,
     tokenId,
+    hidden,
     onNewBid,
 }: {
     highestBid?: string;
     auction?: string;
     tokenId?: string;
-    onNewBid: () => void;
+    hidden: boolean;
+    onNewBid: () => Promise<void>;
 }) => {
     const { isConnected } = useAccount();
     const [bid, setBid] = useState("");
@@ -44,8 +46,8 @@ export const PlaceBid = ({
             track("placeBidError");
         },
         onSuccess: () => {
-            track("placeBidSuccess");
             setBid("");
+            track("placeBidSuccess");
             onNewBid();
         },
     });
@@ -55,6 +57,11 @@ export const PlaceBid = ({
     const nextBidAmount = highestBidBN.add(amountIncrease);
 
     const getError = () => {
+        const minNextBid = utils.formatEther(nextBidAmount);
+        if (bid != "" && bid < minNextBid) {
+            return `Bid must be at least ${minNextBid}`;
+        }
+
         const reason = (error as any)?.reason;
         if (!reason) return "";
 
@@ -64,8 +71,8 @@ export const PlaceBid = ({
     };
 
     return (
-        <div className="flex flex-row flex-wrap gap-4 items-start">
-            <div className="shrink">
+        <div className={clsx("flex flex-row flex-wrap gap-4 items-start ", hidden && "hidden")}>
+            <div className="shrink flex flex-col gap-1">
                 <input
                     value={bid}
                     type="number"
@@ -76,22 +83,27 @@ export const PlaceBid = ({
                     )}
                     placeholder={nextBidAmount ? `Ξ ${utils.formatEther(nextBidAmount)} or more` : ""}
                 />
-                {error && <p className=" text-negative">{getError()}</p>}
+                {error && <p className="caption text-negative">{getError()}</p>}
             </div>
-            <Button
-                disabled={(!write || isLoading) && isConnected}
-                onClick={(e) => {
-                    e.preventDefault();
-                    if (isConnected) {
-                        track("placeBidTriggered");
-                        write?.();
-                    } else {
-                        openConnectModal?.();
-                    }
-                }}
-            >
-                {isLoading ? <Image src="/spinner.svg" height={24} width={24} alt="spinner" /> : "Place bid"}
-            </Button>
+            <div className="flex flex-col gap-1 justify-center items-center">
+                <Button
+                    disabled={(!write || isLoading) && isConnected}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        if (isConnected) {
+                            track("placeBidTriggered");
+                            write?.();
+                        } else {
+                            openConnectModal?.();
+                        }
+                    }}
+                >
+                    {isLoading ? <Image src="/spinner.svg" height={24} width={24} alt="spinner" /> : "Place bid"}
+                </Button>
+                <ExternalLink href="https://bridge.base.org/deposit">
+                    <span className="caption">Get Base ETH</span>
+                </ExternalLink>
+            </div>
         </div>
     );
 };

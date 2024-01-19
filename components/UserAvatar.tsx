@@ -1,22 +1,20 @@
-import { useEnsAvatar } from "wagmi";
+import { Address } from "wagmi";
 import Image from "next/image";
 import getNormalizedURI from "@/utils/getNormalizedURI";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { IPFS_GATEWAY } from "constants/urls";
+import useEnsAvatar from "@/hooks/useEnsAvatar";
 
 export default function UserAvatar({
     address,
     className,
     diameter,
 }: {
-    address: `0x${string}`;
+    address: Address;
     className: string;
     diameter?: number;
 }) {
-    const { data: ensAvatar } = useEnsAvatar({
-        address,
-        chainId: 1,
-    });
+    const ensAvatar = useEnsAvatar(address);
 
     if (!ensAvatar)
         return (
@@ -33,10 +31,10 @@ export default function UserAvatar({
                 })}
                 className={className}
                 alt="avatar"
-                height={20}
-                width={20}
+                height={diameter ?? 32}
+                width={diameter ?? 32}
             />
         );
 
-    return <img alt="avatar" src={ensAvatar} className={className} />;
+    return <Image src={ensAvatar} height={diameter ?? 32} width={diameter ?? 32} alt="avatar" className={className} />;
 }

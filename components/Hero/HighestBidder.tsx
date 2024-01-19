@@ -1,11 +1,11 @@
 import { Fragment } from "react";
-import { useEnsName } from "wagmi";
 import { useTheme } from "@/hooks/useTheme";
 import { shortenAddress } from "@/utils/shortenAddress";
 import UserAvatar from "../UserAvatar";
+import useEnsName from "@/hooks/useEnsName";
 
 export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
-    const { data: ensName } = useEnsName({ address });
+    const ensName = useEnsName(address);
 
     if (!address) return <Fragment />;
 
@@ -15,7 +15,7 @@ export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
 
             <div className="flex items-center">
                 <div className="flex items-center">
-                    <UserAvatar className="h-6 rounded-full mr-2" address={address} />
+                    <UserAvatar className="w-[32px] h-[32px] rounded-full mr-2" diameter={32} address={address} />
                     <div className="font-semibold">{ensName || shortenAddress(address)}</div>
                 </div>
             </div>
