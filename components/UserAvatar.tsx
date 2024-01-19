@@ -25,7 +25,7 @@ export default function UserAvatar({
 
     if (ensAvatar.includes("ipfs"))
         return (
-            <Image
+            <img
                 src={getNormalizedURI(ensAvatar, {
                     preferredIPFSGateway: IPFS_GATEWAY,
                 })}
@@ -36,5 +36,5 @@ export default function UserAvatar({
             />
         );
 
-    return <Image src={ensAvatar} height={diameter ?? 32} width={diameter ?? 32} alt="avatar" className={className} />;
+    return <Image src={ensAvatar} height={diameter ?? 32} width={diameter ?? 32} alt="" className={className} />;
 }
