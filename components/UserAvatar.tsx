@@ -36,5 +36,5 @@ export default function UserAvatar({
             />
         );
 
-    return <img alt="avatar" src={ensAvatar} className={className} />;
+    return <Image src={ensAvatar} height={diameter ?? 32} width={diameter ?? 32} alt="avatar" className={className} />;
 }
