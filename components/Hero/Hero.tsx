@@ -120,7 +120,12 @@ const EndedAuction = ({
     const ensName = useEnsName(owner);
 
     return (
-        <div className={clsx("flex flex-col md:flex-row md:flex-wrap justify-start w-full gap-4", hidden && "hidden")}>
+        <div
+            className={clsx(
+                "flex flex-col md:flex-row md:flex-wrap justify-start w-full gap-6 pb-3",
+                hidden && "hidden"
+            )}
+        >
             <div className="flex flex-col gap-2 shrink-0 min-w-[165px] md:pr-6">
                 <div className="font-light">Winning Bid</div>
                 <h3>{auctionData ? `Ξ ${formatNumber(utils.formatEther(auctionData.amount || "0"), 3)}` : "n/a"}</h3>
@@ -167,7 +172,7 @@ const CurrentAuction = ({
     const ensName = useEnsName(auctionInfo?.highestBidder);
 
     return (
-        <div className={clsx("flex flex-col w-full gap-4", hidden && "hidden")}>
+        <div className={clsx("flex flex-col w-full gap-6 pb-3", hidden && "hidden")}>
             <div className="flex flex-row flex-wrap md:justify-start w-full gap-4 ">
                 <div className="flex flex-col gap-2 md:pr-6 shrink-0 min-w-[165px]">
                     <div className="font-light">{auctionOver ? "Winning Bid" : "Current Bid"}</div>
