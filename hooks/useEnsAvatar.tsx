@@ -8,20 +8,25 @@ export default function useEnsAvatar(address?: Address): string | undefined {
     const ensName = useEnsName(address);
 
     useEffect(() => {
+        let isCancelled = false;
         async function fetch() {
             if (ensName && address) {
                 setEnsAvatar(undefined);
                 const avatar = await viemMainnetClient.getEnsAvatar({ name: ensName });
-                setEnsAvatar(avatar ?? undefined);
+                if (!isCancelled) {
+                    setEnsAvatar(avatar ?? undefined);
+                }
             } else {
                 setEnsAvatar(undefined);
             }
         }
 
         fetch();
-    }, [ensName, address]);
 
-    console.log(ensName, address);
+        return () => {
+            isCancelled = true;
+        };
+    }, [address, ensName]);
 
-    return ensAvatar;
+    return ensName && address ? ensAvatar : undefined;
 }

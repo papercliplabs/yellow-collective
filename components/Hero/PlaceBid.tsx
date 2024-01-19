@@ -1,10 +1,9 @@
 import { BigNumber, utils } from "ethers";
 import Image from "next/image";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction, useAccount, Address } from "wagmi";
 import { AuctionABI } from "@buildersdk/sdk";
 import { useDebounce } from "@/hooks/useDebounce";
-import { useTheme } from "@/hooks/useTheme";
 import Button from "../Button";
 import clsx from "clsx";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
@@ -14,12 +13,14 @@ export const PlaceBid = ({
     highestBid,
     auction,
     tokenId,
+    hidden,
     onNewBid,
 }: {
     highestBid?: string;
     auction?: string;
     tokenId?: string;
-    onNewBid: () => void;
+    hidden: boolean;
+    onNewBid: () => Promise<void>;
 }) => {
     const { isConnected } = useAccount();
     const [bid, setBid] = useState("");
@@ -44,8 +45,8 @@ export const PlaceBid = ({
             track("placeBidError");
         },
         onSuccess: () => {
-            track("placeBidSuccess");
             setBid("");
+            track("placeBidSuccess");
             onNewBid();
         },
     });
@@ -55,6 +56,11 @@ export const PlaceBid = ({
     const nextBidAmount = highestBidBN.add(amountIncrease);
 
     const getError = () => {
+        const minNextBid = utils.formatEther(nextBidAmount);
+        if (bid != "" && bid < minNextBid) {
+            return `Bid must be at least ${minNextBid}`;
+        }
+
         const reason = (error as any)?.reason;
         if (!reason) return "";
 
@@ -64,7 +70,7 @@ export const PlaceBid = ({
     };
 
     return (
-        <div className="flex flex-row flex-wrap gap-4 items-start">
+        <div className={clsx("flex flex-row flex-wrap gap-4 items-start", hidden && "hidden")}>
             <div className="shrink">
                 <input
                     value={bid}

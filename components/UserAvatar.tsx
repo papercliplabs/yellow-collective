@@ -16,8 +16,6 @@ export default function UserAvatar({
 }) {
     const ensAvatar = useEnsAvatar(address);
 
-    console.log(address, ensAvatar);
-
     if (!ensAvatar)
         return (
             <div className={className}>
@@ -33,8 +31,8 @@ export default function UserAvatar({
                 })}
                 className={className}
                 alt="avatar"
-                height={20}
-                width={20}
+                height={diameter ?? 32}
+                width={diameter ?? 32}
             />
         );
 

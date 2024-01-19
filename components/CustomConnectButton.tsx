@@ -1,10 +1,13 @@
 import { useTheme } from "@/hooks/useTheme";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Button from "./Button";
-import { useAccount } from "wagmi";
+import { Address, useAccount } from "wagmi";
 import useEnsName from "@/hooks/useEnsName";
 import useEnsAvatar from "@/hooks/useEnsAvatar";
 import Image from "next/image";
+import clsx from "clsx";
+import UserAvatar from "./UserAvatar";
+import { zeroAddress } from "viem";
 
 export type CustomConnectButtonProps = {
     className: string;
@@ -13,7 +16,6 @@ export type CustomConnectButtonProps = {
 const CustomConnectButton = ({ className }: CustomConnectButtonProps) => {
     const { address } = useAccount();
     const ensName = useEnsName(address);
-    const ensAvatar = useEnsAvatar(address);
 
     return (
         <ConnectButton.Custom>
@@ -46,17 +48,17 @@ const CustomConnectButton = ({ className }: CustomConnectButtonProps) => {
                                 );
                             }
                             return (
-                                <Button variant="secondary" onClick={openAccountModal} className="flex flex-row gap-2">
-                                    {ensAvatar && (
-                                        <Image
-                                            src={ensAvatar}
-                                            width={24}
-                                            height={24}
-                                            alt=""
-                                            className="rounded-full hidden md:block"
-                                        />
-                                    )}
-                                    <h6>{ensName ?? account.displayName}</h6>
+                                <Button
+                                    variant="secondary"
+                                    onClick={openAccountModal}
+                                    className="flex flex-row gap-2 py-[11px]"
+                                >
+                                    <UserAvatar
+                                        address={account.address as Address}
+                                        diameter={32}
+                                        className="w-[32px] h-[32px] rounded-full"
+                                    />
+                                    <h6 className="hidden md:block">{ensName ?? account.displayName}</h6>
                                 </Button>
                             );
                         })()}
