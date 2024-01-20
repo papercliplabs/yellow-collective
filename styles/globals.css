@@ -6,7 +6,7 @@
 
 @layer base {
     * {
-        @apply font-pally antialiased;
+        @apply antialiased font-pally;
         font-synthesis: none !important;
     }
 

@@ -9,7 +9,7 @@ import localFont from "@next/font/local";
 import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 
-const pally = localFont({
+export const pally = localFont({
     src: "../styles/Pally-Variable.ttf",
     display: "swap",
     variable: "--font-pally",
@@ -39,6 +39,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                             content={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/og-image.png`}
                         />
                     </Head>
+
                     <main className={`${pally.variable}`}>
                         <Component {...pageProps} />
                         <Analytics />

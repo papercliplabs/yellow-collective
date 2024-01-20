@@ -5,7 +5,6 @@ import { useCurrentAuctionInfo, useContractInfo, useTokenInfo } from "hooks";
 import { compareAddress } from "@/utils/compareAddress";
 import { SettleAuction } from "./SettleAuction";
 import { PlaceBid } from "./PlaceBid";
-import { HighestBidder } from "./HighestBidder";
 import { Fragment, useEffect, useState } from "react";
 import { AuctionInfo } from "@/services/nouns-builder/auction";
 import { ContractInfo } from "@/services/nouns-builder/token";
@@ -18,6 +17,7 @@ import clsx from "clsx";
 import useEnsName from "@/hooks/useEnsName";
 import { zeroAddress } from "viem";
 import { formatNumber } from "@/utils/formatNumber";
+import BidHistory from "./BidHistory";
 
 export default function Hero() {
     const { data: contractInfo } = useContractInfo();
@@ -85,6 +85,7 @@ export default function Hero() {
                     auctionInfo={auctionInfo}
                     contractInfo={contractInfo}
                     tokenId={currentTokenId}
+                    tokenImage={tokenInfo?.image}
                     hidden={tokenId != currentTokenId}
                     revalidateAuctionInfo={async () => {
                         await mutateCurrentAuctionInfo();
@@ -95,6 +96,7 @@ export default function Hero() {
                 <EndedAuction
                     auctionContract={contractInfo?.auction}
                     tokenId={tokenId}
+                    tokenImage={tokenInfo?.image}
                     owner={tokenInfo?.owner}
                     hidden={tokenId == currentTokenId}
                 />
@@ -106,41 +108,56 @@ export default function Hero() {
 const EndedAuction = ({
     auctionContract,
     tokenId,
+    tokenImage,
     owner,
     hidden,
 }: {
     auctionContract?: string;
-    tokenId?: string;
+    tokenId: string;
+    tokenImage?: string;
     owner?: `0x${string}`;
     hidden: boolean;
 }) => {
     const { data } = usePreviousAuctions({ auctionContract });
-    const auctionData = data?.find((auction) => compareAddress(auction.tokenId, tokenId || ""));
+    const auctionData = data?.find((auction) => compareAddress(auction.tokenId, tokenId));
 
     const ensName = useEnsName(owner);
 
     return (
-        <div
-            className={clsx(
-                "flex flex-col md:flex-row md:flex-wrap justify-start w-full gap-6 pb-3",
-                hidden && "hidden"
-            )}
-        >
-            <div className="flex flex-col gap-2 shrink-0 min-w-[165px] md:pr-6">
-                <div className="font-light">Winning Bid</div>
-                <h3>{auctionData ? `Ξ ${formatNumber(utils.formatEther(auctionData.amount || "0"), 3)}` : "n/a"}</h3>
-            </div>
-            <div className="flex flex-col gap-2">
-                <div className="font-light">Held by</div>
-                <div className="flex items-center gap-2">
-                    <UserAvatar
-                        diameter={44}
-                        className="w-[44px] h-[44px] rounded-full"
-                        address={owner || ethers.constants.AddressZero}
-                    />
-                    <h3>{ensName || shortenAddress(owner || ethers.constants.AddressZero)}</h3>
+        <div className="flex flex-col items-start">
+            <div
+                className={clsx(
+                    "flex flex-col md:flex-row md:flex-wrap justify-start w-full gap-6 pb-3",
+                    hidden && "hidden"
+                )}
+            >
+                <div className="flex flex-col gap-2 shrink-0 min-w-[165px] md:pr-6">
+                    <div className="font-light">Winning Bid</div>
+                    <h3>
+                        {auctionData ? `Ξ ${formatNumber(utils.formatEther(auctionData.amount || "0"), 3)}` : "n/a"}
+                    </h3>
+                </div>
+                <div className="flex flex-col gap-2">
+                    <div className="font-light">Held by</div>
+                    <div className="flex items-center gap-2">
+                        <UserAvatar
+                            diameter={44}
+                            className="w-[44px] h-[44px] rounded-full"
+                            address={owner || ethers.constants.AddressZero}
+                        />
+                        <h3>{ensName || shortenAddress(owner || ethers.constants.AddressZero)}</h3>
+                    </div>
                 </div>
             </div>
+            {auctionData?.amount != undefined && (
+                <BidHistory
+                    tokenId={tokenId}
+                    tokenImage={tokenImage}
+                    bids={auctionData?.bids}
+                    numToShow={0}
+                    title="View bid history"
+                />
+            )}
         </div>
     );
 };
@@ -149,11 +166,13 @@ const CurrentAuction = ({
     auctionInfo,
     contractInfo,
     tokenId,
+    tokenImage,
     hidden,
     revalidateAuctionInfo,
 }: {
     auctionInfo?: AuctionInfo;
     contractInfo?: ContractInfo;
+    tokenImage?: string;
     tokenId: string;
     hidden: boolean;
     revalidateAuctionInfo: () => Promise<void>;
@@ -210,7 +229,15 @@ const CurrentAuction = ({
             {!auctionOver &&
                 auctionInfo?.highestBidder &&
                 !compareAddress(auctionInfo?.highestBidder, ethers.constants.AddressZero) && (
-                    <HighestBidder address={auctionInfo?.highestBidder} />
+                    <>
+                        <BidHistory
+                            tokenImage={tokenImage}
+                            tokenId={tokenId}
+                            bids={auctionInfo?.bids}
+                            numToShow={3}
+                            title="View all bids"
+                        />
+                    </>
                 )}
         </div>
     );

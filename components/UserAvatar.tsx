@@ -14,14 +14,14 @@ export default function UserAvatar({
     className: string;
     diameter?: number;
 }) {
-    const ensAvatar = useEnsAvatar(address);
+    const ensAvatar = ""; //useEnsAvatar(address);
 
-    if (!ensAvatar)
-        return (
-            <div className={className}>
-                <Jazzicon diameter={diameter} seed={jsNumberForAddress(address)} />
-            </div>
-        );
+    // if (!ensAvatar)
+    return (
+        <div className={className}>
+            <Jazzicon diameter={diameter} seed={jsNumberForAddress(address)} />
+        </div>
+    );
 
     if (ensAvatar.includes("ipfs"))
         return (

@@ -71,38 +71,43 @@ export const PlaceBid = ({
     };
 
     return (
-        <div className={clsx("flex flex-row flex-wrap gap-4 items-start ", hidden && "hidden")}>
-            <div className="shrink flex flex-col gap-1">
-                <input
-                    value={bid}
-                    type="number"
-                    onChange={(e) => setBid(e.target.value)}
-                    className={clsx(
-                        "bg-primary h-[59px] rounded-[18px] px-6 py-4 focus:border-accent border-2 outline-none",
-                        getError() != undefined && getError() != "" && "border-negative"
-                    )}
-                    placeholder={nextBidAmount ? `Ξ ${utils.formatEther(nextBidAmount)} or more` : ""}
-                />
-                {error && <p className="caption text-negative">{getError()}</p>}
-            </div>
-            <div className="flex flex-col gap-1 justify-center items-center">
-                <Button
-                    disabled={(!write || isLoading) && isConnected}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        if (isConnected) {
-                            track("placeBidTriggered");
-                            write?.();
-                        } else {
-                            openConnectModal?.();
-                        }
-                    }}
-                >
-                    {isLoading ? <Image src="/spinner.svg" height={24} width={24} alt="spinner" /> : "Place bid"}
-                </Button>
-                <ExternalLink href="https://bridge.base.org/deposit">
-                    <span className="caption">Get Base ETH</span>
-                </ExternalLink>
+        <div className={clsx("flex flex-col gap-6", hidden && "hidden")}>
+            <ExternalLink href="https://bridge.base.org/deposit">
+                <div className="flex flex-row gap-2">
+                    <Image src="/info-circle.svg" width={20} height={20} alt="" />
+                    <span className="font-bold">Bridge to Base</span>
+                </div>
+            </ExternalLink>
+            <div className={clsx("flex flex-row flex-wrap gap-4 items-start ")}>
+                <div className="shrink flex flex-col gap-1">
+                    <input
+                        value={bid}
+                        type="number"
+                        onChange={(e) => setBid(e.target.value)}
+                        className={clsx(
+                            "bg-primary h-[59px] rounded-[18px] px-6 py-4 focus:border-accent border-2 outline-none",
+                            getError() != undefined && getError() != "" && "border-negative"
+                        )}
+                        placeholder={nextBidAmount ? `Ξ ${utils.formatEther(nextBidAmount)} or more` : ""}
+                    />
+                    {error && <p className="caption text-negative">{getError()}</p>}
+                </div>
+                <div className="flex flex-col gap-1 justify-center items-center">
+                    <Button
+                        disabled={(!write || isLoading) && isConnected}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (isConnected) {
+                                track("placeBidTriggered");
+                                write?.();
+                            } else {
+                                openConnectModal?.();
+                            }
+                        }}
+                    >
+                        {isLoading ? <Image src="/spinner.svg" height={24} width={24} alt="spinner" /> : "Place bid"}
+                    </Button>
+                </div>
             </div>
         </div>
     );
