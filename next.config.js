@@ -14,6 +14,10 @@ const nextConfig = {
         port: "",
         pathname: "/renderer/**",
       },
+      {
+        protocol: "https",
+        hostname: "**",
+      },
     ],
   },
   async rewrites() {

@@ -3,9 +3,11 @@ import { useDAOAddresses, useTreasuryBalance } from "hooks";
 import Link from "next/link";
 import { ETHERSCAN_BASEURL } from "constants/urls";
 import CustomConnectButton from "./CustomConnectButton";
-import { TOKEN_CONTRACT } from "constants/addresses";
-import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
+import { BASED_AND_YELLOW_MULTISIG, TOKEN_CONTRACT } from "constants/addresses";
 import Button from "./Button";
+import { useBalance } from "wagmi";
+import { formatNumber } from "@/utils/formatNumber";
+import { BigNumber, ethers } from "ethers";
 
 export default function Header() {
     const { data: addresses } = useDAOAddresses({
@@ -14,6 +16,8 @@ export default function Header() {
     const { data: treasury } = useTreasuryBalance({
         treasuryContract: addresses?.treasury,
     });
+
+    const { data: multisigBalanceData } = useBalance({ address: BASED_AND_YELLOW_MULTISIG });
 
     return (
         <div className="flex items-center justify-between w-full px-4 md:px-10 py-2 h-[80px] gap-2">
@@ -27,7 +31,11 @@ export default function Header() {
                         rel="noreferer noopener noreferrer"
                         target="_blank"
                     >
-                        <h6>Ξ {treasury ? formatTreasuryBalance(treasury) : "0"}</h6>
+                        <h6>
+                            Ξ {treasury ? formatNumber(ethers.utils.formatEther(treasury), 2) : "0"}
+                            {(multisigBalanceData?.value ?? BigNumber.from(0)) > BigNumber.from(1000) &&
+                                " + " + formatNumber(multisigBalanceData?.formatted, 2)}
+                        </h6>
                     </Link>
                 </Button>
             </div>

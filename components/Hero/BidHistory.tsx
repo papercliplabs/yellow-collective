@@ -1,6 +1,4 @@
 import { Bid } from "@/services/nouns-builder/auction";
-import UserAvatar from "../UserAvatar";
-import UserName from "../UserName";
 import { formatNumber } from "@/utils/formatNumber";
 import { utils } from "ethers";
 import ExternalLink from "../ExternalLink";
@@ -8,6 +6,7 @@ import Image from "next/image";
 import { ETHERSCAN_BASEURL } from "constants/urls";
 import { Dialog, DialogContent, DialogHeader, DialogTrigger } from "../Dialog";
 import { twMerge } from "tailwind-merge";
+import WalletInfo from "../WalletInfo";
 
 function BidRow({ bid, tight }: { bid: Bid; tight: boolean }) {
     return (
@@ -17,12 +16,7 @@ function BidRow({ bid, tight }: { bid: Bid; tight: boolean }) {
                 !tight && "py-3 border-b-2 border-transparent/10"
             )}
         >
-            <div className="flex flex-row gap-2 items-center">
-                <UserAvatar address={bid.bidder} className="w-6 h-6 rounded-full" />
-                <h6>
-                    <UserName address={bid.bidder} />
-                </h6>
-            </div>
+            <WalletInfo address={bid.bidder} size="sm" />
             <ExternalLink href={`${ETHERSCAN_BASEURL}/tx/${bid.transactionHash}`}>
                 <div className="flex flex-row gap-2 items-center hover:opacity-70 transition-opacity">
                     <h6 className="text-primary/70">Ξ {formatNumber(utils.formatEther(bid.bidAmount || "0"), 3)}</h6>
@@ -51,33 +45,35 @@ export default function BidHistory({
             {bids?.slice(0, numToShow).map((bid, i) => {
                 return <BidRow bid={bid} tight={false} key={i} />;
             })}
-            <Dialog>
-                <DialogTrigger>
-                    <h6 className="pt-3  text-primary/70 hover:text-primary/50">{title}</h6>
-                </DialogTrigger>
-                <DialogContent className="flex flex-col max-h-[90vh] md:max-h-[70vh]">
-                    <DialogHeader>
-                        <div className="flex flex-row gap-4 items-center border-b-2 p-6">
-                            <Image
-                                src={tokenImage ?? ""}
-                                width={64}
-                                height={64}
-                                alt=""
-                                className="rounded-xl border-transparent/10 border-2"
-                            />
-                            <div className="flex flex-col items-start">
-                                <h6 className="text-secondary">Bids for</h6>
-                                <h5>Collective Noun #{parseInt(tokenId, 16)}</h5>
+            {(bids?.length ?? 0) > numToShow && (
+                <Dialog>
+                    <DialogTrigger>
+                        <h6 className="pt-3  text-primary/70 hover:text-primary/50">{title}</h6>
+                    </DialogTrigger>
+                    <DialogContent className="flex flex-col max-h-[90vh] md:max-h-[70vh]">
+                        <DialogHeader>
+                            <div className="flex flex-row gap-4 items-center border-b-2 p-6">
+                                <Image
+                                    src={tokenImage ?? ""}
+                                    width={64}
+                                    height={64}
+                                    alt=""
+                                    className="rounded-xl border-transparent/10 border-2"
+                                />
+                                <div className="flex flex-col items-start">
+                                    <h6 className="text-secondary">Bids for</h6>
+                                    <h5>Collective Noun #{parseInt(tokenId, 16)}</h5>
+                                </div>
                             </div>
+                        </DialogHeader>
+                        <div className="flex flex-col gap-6 p-6 overflow-y-auto">
+                            {bids?.map((bid, i) => (
+                                <BidRow bid={bid} tight={true} key={i} />
+                            ))}
                         </div>
-                    </DialogHeader>
-                    <div className="flex flex-col gap-6 p-6 overflow-y-auto">
-                        {bids?.map((bid, i) => (
-                            <BidRow bid={bid} tight={true} key={i} />
-                        ))}
-                    </div>
-                </DialogContent>
-            </Dialog>
+                    </DialogContent>
+                </Dialog>
+            )}
         </div>
     );
 }
