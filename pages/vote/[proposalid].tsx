@@ -21,7 +21,6 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
-import useEnsName from "@/hooks/useEnsName";
 
 export default function ProposalComponent() {
     const { data: addresses } = useDAOAddresses({
@@ -38,8 +37,6 @@ export default function ProposalComponent() {
     const proposalNumber = proposals ? proposals.length - proposals.findIndex((x) => x.proposalId === proposalid) : 0;
 
     const proposal = proposals?.find((x) => x.proposalId === proposalid);
-
-    const ensName = useEnsName(proposal?.proposal.proposer);
 
     if (!proposal)
         return (
@@ -106,7 +103,7 @@ export default function ProposalComponent() {
                                 target="_blank"
                                 className="text-skin-highlighted underline"
                             >
-                                {ensName || shortenAddress(proposal.proposal.proposer)}
+                                {shortenAddress(proposal.proposal.proposer)}
                             </Link>
                         </div>
                     </div>

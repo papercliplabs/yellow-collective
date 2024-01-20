@@ -10,14 +10,13 @@ import { AuctionInfo } from "@/services/nouns-builder/auction";
 import { ContractInfo } from "@/services/nouns-builder/token";
 import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
 import { shortenAddress } from "@/utils/shortenAddress";
-import UserAvatar from "../UserAvatar";
 import { useRouter } from "next/router";
 import Button from "../Button";
 import clsx from "clsx";
-import useEnsName from "@/hooks/useEnsName";
 import { zeroAddress } from "viem";
 import { formatNumber } from "@/utils/formatNumber";
 import BidHistory from "./BidHistory";
+import WalletInfo from "../WalletInfo";
 
 export default function Hero() {
     const { data: contractInfo } = useContractInfo();
@@ -121,8 +120,6 @@ const EndedAuction = ({
     const { data } = usePreviousAuctions({ auctionContract });
     const auctionData = data?.find((auction) => compareAddress(auction.tokenId, tokenId));
 
-    const ensName = useEnsName(owner);
-
     return (
         <div className="flex flex-col items-start">
             <div
@@ -139,14 +136,7 @@ const EndedAuction = ({
                 </div>
                 <div className="flex flex-col gap-2">
                     <div className="font-light">Held by</div>
-                    <div className="flex items-center gap-2">
-                        <UserAvatar
-                            diameter={44}
-                            className="w-[44px] h-[44px] rounded-full"
-                            address={owner || ethers.constants.AddressZero}
-                        />
-                        <h3>{ensName || shortenAddress(owner || ethers.constants.AddressZero)}</h3>
-                    </div>
+                    <WalletInfo address={owner || ethers.constants.AddressZero} size="lg" />
                 </div>
             </div>
             {auctionData?.amount != undefined && (
@@ -188,8 +178,6 @@ const CurrentAuction = ({
         return () => clearInterval(intervalId);
     }, [auctionInfo]);
 
-    const ensName = useEnsName(auctionInfo?.highestBidder);
-
     return (
         <div className={clsx("flex flex-col w-full gap-6 pb-3", hidden && "hidden")}>
             <div className="flex flex-row flex-wrap md:justify-start w-full gap-4 ">
@@ -201,16 +189,7 @@ const CurrentAuction = ({
                 <div className="flex flex-col gap-2">
                     <div className="font-light">{auctionOver ? "Winner" : "Auction ends in"}</div>
                     {auctionOver ? (
-                        <div className="flex items-center gap-2">
-                            <UserAvatar
-                                address={auctionInfo?.highestBidder ?? zeroAddress}
-                                diameter={44}
-                                className="w-[44px] h-[44px]"
-                            />
-                            <h3>
-                                {ensName || shortenAddress(auctionInfo?.highestBidder || ethers.constants.AddressZero)}
-                            </h3>
-                        </div>
+                        <WalletInfo address={auctionInfo?.highestBidder ?? zeroAddress} size="lg" />
                     ) : (
                         <CountdownDisplay to={auctionInfo?.endTime || "0"} />
                     )}
