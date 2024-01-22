@@ -1,4 +1,4 @@
-import useEnsWalletInfo from "@/hooks/useEnsWalletInfo";
+import useEnsWalletInfo from "@/hooks/fetch/useEnsWalletInfo";
 import { shortenAddress } from "@/utils/shortenAddress";
 import { ethers } from "ethers";
 import { Address } from "wagmi";
@@ -16,7 +16,7 @@ interface WalletInfoProps {
 }
 
 export default function WalletInfo({ address, hideAvatar, hideAddress, disableEns, size }: WalletInfoProps) {
-    const { ensName, ensAvatar } = useEnsWalletInfo(address, disableEns);
+    const { data: ensInfo } = useEnsWalletInfo(address);
     const [ensImgError, setEnsImgError] = useState<boolean>(false);
 
     useEffect(() => {
@@ -26,9 +26,9 @@ export default function WalletInfo({ address, hideAvatar, hideAddress, disableEn
     return (
         <div className="flex flex-row gap-2 items-center">
             {!hideAvatar &&
-                (!disableEns && ensAvatar && !ensImgError ? (
+                (!disableEns && ensInfo?.ensAvatar && !ensImgError ? (
                     <Image
-                        src={ensAvatar}
+                        src={ensInfo.ensAvatar}
                         alt="avatar"
                         height={size == "sm" ? 24 : 44}
                         width={size == "sm" ? 24 : 44}
@@ -41,11 +41,15 @@ export default function WalletInfo({ address, hideAvatar, hideAddress, disableEn
             {!hideAddress &&
                 (size == "sm" ? (
                     <h6>
-                        {!disableEns && ensName ? ensName : shortenAddress(address || ethers.constants.AddressZero, 4)}
+                        {!disableEns && ensInfo?.ensName
+                            ? ensInfo.ensName
+                            : shortenAddress(address || ethers.constants.AddressZero, 4)}
                     </h6>
                 ) : (
                     <h3>
-                        {!disableEns && ensName ? ensName : shortenAddress(address || ethers.constants.AddressZero, 4)}
+                        {!disableEns && ensInfo?.ensName
+                            ? ensInfo.ensName
+                            : shortenAddress(address || ethers.constants.AddressZero, 4)}
                     </h3>
                 ))}
         </div>
