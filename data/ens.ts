@@ -1,14 +1,25 @@
 import { viemMainnetClient } from "configs/wallet";
 import { Address } from "viem";
 
-export interface EnsInfo {
+export interface GetEnsNameReturnType {
     ensName?: string;
+}
+
+export async function getEnsName({ address }: { address: Address }): Promise<GetEnsNameReturnType> {
+    const ensName = (await viemMainnetClient.getEnsName({ address })) ?? undefined;
+
+    return { ensName: ensName };
+}
+
+export interface GetEnsAvatarReturnType {
     ensAvatar?: string;
 }
 
-export async function getEnsInfo({ address }: { address: Address }): Promise<EnsInfo> {
-    const ensName = (await viemMainnetClient.getEnsName({ address })) ?? undefined;
-    const ensAvatar = ensName ? (await viemMainnetClient.getEnsAvatar({ name: ensName })) ?? undefined : undefined;
+export async function getEnsAvatar({ address }: { address: Address }): Promise<GetEnsAvatarReturnType> {
+    const ensNameResp = await getEnsName({ address });
+    const ensAvatar = ensNameResp.ensName
+        ? (await viemMainnetClient.getEnsAvatar({ name: ensNameResp.ensName })) ?? undefined
+        : undefined;
 
-    return { ensName, ensAvatar };
+    return { ensAvatar: ensAvatar };
 }

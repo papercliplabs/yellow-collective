@@ -1,4 +1,4 @@
-import useEnsWalletInfo from "@/hooks/fetch/useEnsWalletInfo";
+import useEnsWalletInfo from "@/hooks/fetch/useEnsName";
 import { shortenAddress } from "@/utils/shortenAddress";
 import { ethers } from "ethers";
 import { Address } from "wagmi";
@@ -6,6 +6,8 @@ import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { zeroAddress } from "viem";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import useEnsName from "@/hooks/fetch/useEnsName";
+import useEnsAvatar from "@/hooks/fetch/useEnsAvatar";
 
 interface WalletInfoProps {
     address?: Address;
@@ -16,7 +18,8 @@ interface WalletInfoProps {
 }
 
 export default function WalletInfo({ address, hideAvatar, hideAddress, disableEns, size }: WalletInfoProps) {
-    const { data: ensInfo } = useEnsWalletInfo(address);
+    const { data: ensNameResp } = useEnsName(address);
+    const { data: ensAvatarResp } = useEnsAvatar(address);
     const [ensImgError, setEnsImgError] = useState<boolean>(false);
 
     useEffect(() => {
@@ -26,9 +29,9 @@ export default function WalletInfo({ address, hideAvatar, hideAddress, disableEn
     return (
         <div className="flex flex-row gap-2 items-center">
             {!hideAvatar &&
-                (!disableEns && ensInfo?.ensAvatar && !ensImgError ? (
+                (!disableEns && ensAvatarResp?.ensAvatar && !ensImgError ? (
                     <Image
-                        src={ensInfo.ensAvatar}
+                        src={ensAvatarResp.ensAvatar}
                         alt="avatar"
                         height={size == "sm" ? 24 : 44}
                         width={size == "sm" ? 24 : 44}
@@ -41,14 +44,14 @@ export default function WalletInfo({ address, hideAvatar, hideAddress, disableEn
             {!hideAddress &&
                 (size == "sm" ? (
                     <h6>
-                        {!disableEns && ensInfo?.ensName
-                            ? ensInfo.ensName
+                        {!disableEns && ensNameResp?.ensName
+                            ? ensNameResp.ensName
                             : shortenAddress(address || ethers.constants.AddressZero, 4)}
                     </h6>
                 ) : (
                     <h3>
-                        {!disableEns && ensInfo?.ensName
-                            ? ensInfo.ensName
+                        {!disableEns && ensNameResp?.ensName
+                            ? ensNameResp.ensName
                             : shortenAddress(address || ethers.constants.AddressZero, 4)}
                     </h3>
                 ))}
