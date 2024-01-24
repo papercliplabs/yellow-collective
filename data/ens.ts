@@ -1,14 +1,32 @@
 import { viemMainnetClient } from "configs/wallet";
-import { Address } from "viem";
+import { Address, hexToString, slice } from "viem";
 
 export interface GetEnsNameReturnType {
     ensName?: string;
 }
 
 export async function getEnsName({ address }: { address: Address }): Promise<GetEnsNameReturnType> {
-    const ensName = (await viemMainnetClient.getEnsName({ address })) ?? undefined;
+    // Get NNS or ENS name
+    try {
+        // TODO: prevent an error from logging here, its spamming the server console
+        const res = await viemMainnetClient.call({
+            to: "0x849f92178950f6254db5d16d1ba265e70521ac1b",
+            data: `0x55ea6c47000000000000000000000000${address.substring(2)}`,
+        });
 
-    return { ensName: ensName };
+        let name = undefined;
+        if (res?.data) {
+            const offset = Number(slice(res.data, 0, 32));
+            const length = Number(slice(res.data, offset, offset + 32));
+            const data = slice(res.data, offset + 32, offset + 32 + length);
+
+            name = hexToString(data);
+        }
+
+        return { ensName: name };
+    } catch {
+        return { ensName: undefined };
+    }
 }
 
 export interface GetEnsAvatarReturnType {
@@ -16,10 +34,8 @@ export interface GetEnsAvatarReturnType {
 }
 
 export async function getEnsAvatar({ address }: { address: Address }): Promise<GetEnsAvatarReturnType> {
-    const ensNameResp = await getEnsName({ address });
-    const ensAvatar = ensNameResp.ensName
-        ? (await viemMainnetClient.getEnsAvatar({ name: ensNameResp.ensName })) ?? undefined
-        : undefined;
+    const ensName = await viemMainnetClient.getEnsName({ address });
+    const ensAvatar = ensName ? (await viemMainnetClient.getEnsAvatar({ name: ensName })) ?? undefined : undefined;
 
     return { ensAvatar: ensAvatar };
 }

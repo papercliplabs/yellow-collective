@@ -1,5 +1,4 @@
-import { base, baseGoerli } from "@wagmi/chains";
-import { Address } from "wagmi";
+import { getAddress } from "viem";
 
 export const TOKEN_CONTRACT = process.env.NEXT_PUBLIC_TOKEN_CONTRACT!;
 
@@ -12,4 +11,4 @@ export const MANAGER_CONTRACT = {
     "84531": "0x550c326d688fD51ae65AC6A2d48749E631023A03",
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
-export const BASED_AND_YELLOW_MULTISIG = "0x0b379F1848fA2aab7790966373618F4B0Fea6A6e" as Address;
+export const BASED_AND_YELLOW_MULTISIG = getAddress("0x0b379F1848fA2aab7790966373618F4B0Fea6A6e");

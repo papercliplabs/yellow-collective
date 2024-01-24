@@ -12,7 +12,7 @@ import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
 import { useRouter } from "next/router";
 import Button from "../Button";
 import clsx from "clsx";
-import { zeroAddress } from "viem";
+import { getAddress, zeroAddress } from "viem";
 import { formatNumber } from "@/utils/formatNumber";
 import BidHistory from "./BidHistory";
 import WalletInfo from "../WalletInfo";
