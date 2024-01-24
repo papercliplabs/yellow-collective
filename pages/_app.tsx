@@ -5,7 +5,7 @@ import { wagmiClient, chains } from "../configs/wallet";
 import { RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";
 import { SWRConfig } from "swr";
 import { useInitTheme } from "@/hooks/useInitTheme";
-import localFont from "@next/font/local";
+import localFont from "next/font/local";
 import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -13,6 +13,12 @@ export const pally = localFont({
     src: "../styles/Pally-Variable.ttf",
     display: "swap",
     variable: "--font-pally",
+});
+
+export const nns = localFont({
+    src: "../styles/LondrinaSolid-NNS.ttf",
+    display: "swap",
+    variable: "--font-nns",
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -40,7 +46,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                         />
                     </Head>
 
-                    <main className={`${pally.variable}`}>
+                    <main className={`${nns.variable} ${pally.variable}`}>
                         <Component {...pageProps} />
                         <Analytics />
                     </main>

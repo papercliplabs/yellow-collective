@@ -5,9 +5,10 @@ import { Address } from "wagmi";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { getAddress, zeroAddress } from "viem";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useEnsName from "@/hooks/fetch/useEnsName";
 import useEnsAvatar from "@/hooks/fetch/useEnsAvatar";
+import clsx from "clsx";
 
 interface WalletInfoProps {
     address?: Address;
@@ -26,6 +27,28 @@ export default function WalletInfo({ address, hideAvatar, hideAddress, disableEn
         setEnsImgError(false);
     }, [address]);
 
+    const name = useMemo(() => {
+        if (!disableEns && ensNameResp?.ensName) {
+            const name = ensNameResp.ensName;
+            if (name.includes("⌐◨-◨")) {
+                // NNS
+                const split = name.split(".");
+                return (
+                    <>
+                        {split[0]}.
+                        <span className={clsx("font-nns", size == "sm" ? " text-[14px]" : "text-[24px]")}>
+                            {split[1]}
+                        </span>
+                    </>
+                );
+            } else {
+                return name;
+            }
+        } else {
+            return shortenAddress(address ? getAddress(address) : ethers.constants.AddressZero, 4);
+        }
+    }, [address, ensNameResp, size]);
+
     return (
         <div className="flex flex-row gap-2 items-center">
             {!hideAvatar &&
@@ -41,20 +64,7 @@ export default function WalletInfo({ address, hideAvatar, hideAddress, disableEn
                 ) : (
                     <Jazzicon diameter={size == "sm" ? 24 : 44} seed={jsNumberForAddress(address ?? zeroAddress)} />
                 ))}
-            {!hideAddress &&
-                (size == "sm" ? (
-                    <h6>
-                        {!disableEns && ensNameResp?.ensName
-                            ? ensNameResp.ensName
-                            : shortenAddress(address ? getAddress(address) : ethers.constants.AddressZero, 4)}
-                    </h6>
-                ) : (
-                    <h3>
-                        {!disableEns && ensNameResp?.ensName
-                            ? ensNameResp.ensName
-                            : shortenAddress(address ? getAddress(address) : ethers.constants.AddressZero, 4)}
-                    </h3>
-                ))}
+            {!hideAddress && (size == "sm" ? <h6>{name}</h6> : <h3>{name}</h3>)}
         </div>
     );
 }

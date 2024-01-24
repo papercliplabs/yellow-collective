@@ -6,12 +6,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [IPFS_GATEWAY.replace("https://", "")],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "api.zora.co",
-        port: "",
         pathname: "/renderer/**",
       },
       {
@@ -28,6 +26,12 @@ const nextConfig = {
       },
     ];
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+      level: "verbose"
+    }
+  }
 };
 
 module.exports = nextConfig;

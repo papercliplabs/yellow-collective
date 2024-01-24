@@ -8,7 +8,6 @@ export interface GetEnsNameReturnType {
 export async function getEnsName({ address }: { address: Address }): Promise<GetEnsNameReturnType> {
     // Get NNS or ENS name
     try {
-        // TODO: prevent an error from logging here, its spamming the server console
         const res = await viemMainnetClient.call({
             to: "0x849f92178950f6254db5d16d1ba265e70521ac1b",
             data: `0x55ea6c47000000000000000000000000${address.substring(2)}`,
@@ -24,7 +23,7 @@ export async function getEnsName({ address }: { address: Address }): Promise<Get
         }
 
         return { ensName: name };
-    } catch {
+    } catch (e) {
         return { ensName: undefined };
     }
 }

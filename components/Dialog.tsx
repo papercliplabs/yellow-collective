@@ -6,7 +6,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
-import { pally } from "pages/_app";
+import { nns, pally } from "pages/_app";
 
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -46,6 +46,7 @@ const DialogContent = React.forwardRef<
             className={cn(
                 "flex flex-col fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] border bg-primary shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-2xl max-h-[70vh] overflow-hidden",
                 className,
+                nns.variable,
                 pally.variable
             )}
             {...props}
