@@ -51,6 +51,9 @@ const faqItems: FaqItem[] = [
                         <ExternalLink href="https://x.com/joshuafisher?s=21">Joshua Fisher</ExternalLink>
                     </li>
                     <li>
+                        <ExternalLink href="https://paperclip.xyz">Paperclip Labs</ExternalLink>
+                    </li>
+                    <li>
                         <ExternalLink href="https://x.com/profwerder?s=21">Prof Werder</ExternalLink>
                     </li>
                     <li>
