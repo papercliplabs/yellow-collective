@@ -109,7 +109,7 @@ const faqItems: FaqItem[] = [
                 </p>
                 <p>
                     After Token #10 is minted, 2 proposals will be made to 1{")"} Airdrop a founding team allocation of
-                    1 token each (11 total) to the Collective Nounders, and 2{")"} Turn on the 10 allocation for Prizes
+                    1 token each (12 total) to the Collective Nounders, and 2{")"} Turn on the 10 allocation for Prizes
                     as mentioned above. These will only be turned on after 10 tokens so as not to interfere with the fun
                     and mystique of the first 10 auctions by laying claim to all the early tokens for allocations. TYC
                     is setting this expectation here in advance of launch as part of our implied tokenomics, and

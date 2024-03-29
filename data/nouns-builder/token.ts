@@ -3,7 +3,11 @@ import DefaultProvider from "@/utils/DefaultProvider";
 import parseBase64String from "@/utils/parseBase64String";
 import getNormalizedURI from "@/utils/getNormalizedURI";
 import { BigNumber, BigNumberish, constants } from "ethers";
-import { IPFS_GATEWAY } from "constants/urls";
+import { IPFS_GATEWAY, SUBGRAPH_ENDPOINT } from "constants/urls";
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
+import { parse } from "graphql";
+import { GraphQLClient, gql } from "graphql-request";
+import { TOKEN_CONTRACT } from "constants/addresses";
 
 const { token } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
 
@@ -58,20 +62,32 @@ export const getTokenInfo = async ({
   address: string;
   tokenid: string;
 }) => {
-  const tokenContract = token({
-    address: address as string,
-  });
-  const tokenIdBn = BigNumber.from(tokenid);
-  const [tokenURI, owner] = await Promise.allSettled([
-    tokenContract.tokenURI(tokenIdBn),
-    tokenContract.ownerOf(tokenIdBn),
-  ]);
+  const query: TypedDocumentNode<
+    { token?: { image: string; name: string; owner: string } },
+    { id: string }
+  > = parse(gql`
+    query tokenInfo($id: ID!) {
+      token(id: $id) {
+        image
+        name
+        owner
+      }
+    }
+  `);
 
-  if (tokenURI.status === "rejected") throw new Error("Error token not found");
+  const client = new GraphQLClient(SUBGRAPH_ENDPOINT);
+  const id = `${TOKEN_CONTRACT.toLowerCase()}:${parseInt(tokenid, 16)}`;
+  const resp = await client.request({ document: query, variables: { id } });
+  const token = resp?.token;
+
+  if (!token) {
+    console.error("getTokenInfo, subgraph error", tokenid);
+  }
 
   return {
-    ...parseBase64String(tokenURI.value),
-    owner: owner.status === "rejected" ? constants.AddressZero : owner?.value,
+    name: token?.name,
+    image: token?.image,
+    owner: token?.owner,
   } as TokenInfo;
 };
 
