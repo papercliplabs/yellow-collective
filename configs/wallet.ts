@@ -6,7 +6,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { zoraTestnet, zora, base, baseGoerli } from "@wagmi/chains";
 
 import { createPublicClient, http } from "viem";
-import { mainnet as mainnetViem } from "viem/chains";
+import { baseSepolia, mainnet as mainnetViem } from "viem/chains";
 
 const selectedChain = {
     "1": mainnet,
@@ -15,6 +15,7 @@ const selectedChain = {
     "7777777": zora,
     "8453": base,
     "84531": baseGoerli,
+    "84532": baseSepolia,
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
 export const RPC_URL = {
@@ -24,9 +25,10 @@ export const RPC_URL = {
     "7777777": "https://rpc.zora.energy",
     "8453": `https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
     "84531": `https://base-goerli.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
+    "84532": `https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
-export type ChainId = "1" | "5" | "999" | "7777777" | "8453" | "84531";
+export type ChainId = "1" | "5" | "999" | "7777777" | "8453" | "84531" | "84532";
 
 const { chains, provider } = configureChains(
     [selectedChain],
