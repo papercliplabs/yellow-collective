@@ -5,65 +5,65 @@
 @tailwind utilities;
 
 @layer base {
-    * {
-        @apply antialiased font-pally;
-        font-synthesis: none !important;
-    }
+  * {
+    @apply antialiased font-pally;
+    font-synthesis: none !important;
+  }
 
-    html,
-    body {
-        @apply w-screen overflow-x-hidden text-primary;
-    }
+  html,
+  body {
+    @apply w-screen overflow-x-hidden text-primary;
+  }
 
-    h1 {
-        @apply text-[48px] leading-[56px] md:text-[56px] md:leading-[64px] font-bold;
-    }
+  h1 {
+    @apply text-[48px] leading-[56px] md:text-[56px] md:leading-[64px] font-bold;
+  }
 
-    h2 {
-        @apply text-[40px] leading-[48px] md:text-[42px] md:leading-[48px] font-bold;
-    }
+  h2 {
+    @apply text-[40px] leading-[48px] md:text-[42px] md:leading-[48px] font-bold;
+  }
 
-    h3 {
-        @apply text-[32px] leading-[40px] md:text-[36px] md:leading-[44px] font-bold;
-    }
+  h3 {
+    @apply text-[32px] leading-[40px] md:text-[36px] md:leading-[44px] font-bold;
+  }
 
-    h4 {
-        @apply text-[24px] leading-[32px] md:text-[28px] md:leading-[36px] font-bold;
-    }
+  h4 {
+    @apply text-[24px] leading-[32px] md:text-[28px] md:leading-[36px] font-bold;
+  }
 
-    h5 {
-        @apply text-[20px] leading-[28px] md:text-[24px] md:leading-[32px] font-bold;
-    }
+  h5 {
+    @apply text-[20px] leading-[28px] md:text-[24px] md:leading-[32px] font-bold;
+  }
 
-    h6 {
-        @apply text-[18px] leading-[24px] font-bold;
-    }
+  h6 {
+    @apply text-[18px] leading-[24px] font-bold;
+  }
 
-    span,
-    p,
-    div {
-        @apply text-[18px] leading-[28px] md:text-[18px] md:leading-[28px];
-    }
+  span,
+  p,
+  div {
+    @apply text-[18px] leading-[28px] md:text-[18px] md:leading-[28px];
+  }
 
-    .caption {
-        @apply text-[16px] leading-[18px] font-medium;
-    }
+  .caption {
+    @apply text-[16px] leading-[18px] font-medium;
+  }
 
-    .clickable-active {
-        @apply brightness-[85%] scale-[98%] ease-in-out;
-    }
+  .clickable-active {
+    @apply brightness-[85%] scale-[98%] ease-in-out;
+  }
 }
 
 @layer site {
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-    /* Firefox */
-    input[type="number"] {
-        -moz-appearance: textfield;
-    }
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
