@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getPreviousAuctions } from "data/nouns-builder/auction";
+import { getPreviousAuction } from "data/nouns-builder/auction";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { address } = req.query;
+  const { address, tokenId } = req.query;
 
-  const previousAuctions = await getPreviousAuctions({
+  const previousAuction = await getPreviousAuction({
     address: address as string,
+    tokenId: tokenId as string,
   });
 
   const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
@@ -13,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     "Cache-Control",
     `s-maxage=60, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`
   );
-  res.send(previousAuctions);
+  res.send(previousAuction);
 };
 
 export default handler;

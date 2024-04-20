@@ -29,9 +29,9 @@ const nextConfig = {
   logging: {
     fetches: {
       fullUrl: true,
-      level: "verbose"
-    }
-  }
+      level: "verbose",
+    },
+  },
 };
 
 module.exports = nextConfig;

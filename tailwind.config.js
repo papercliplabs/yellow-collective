@@ -33,7 +33,7 @@ module.exports = {
         accent: {
           DEFAULT: "#FBCB07",
           blue: "#0786FB",
-          light: "#d2dcf9"
+          light: "#d2dcf9",
         },
         skin: {
           base: withOpacity("--color-text-base"),
@@ -51,7 +51,7 @@ module.exports = {
         secondary: "#E9ECEF",
         accent: {
           DEFAULT: "#FBCB07",
-          blue: "#0786FB"
+          blue: "#0786FB",
         },
         dark: "#222",
         disabled: "#CED4DA",
@@ -73,7 +73,7 @@ module.exports = {
         secondary: "#E9ECEF",
         accent: {
           DEFAULT: "#0D6EFD",
-          light: "#C9DFFF"
+          light: "#C9DFFF",
         },
         skin: {
           stroke: withOpacity("--color-stroke"),
