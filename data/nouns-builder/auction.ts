@@ -8,6 +8,7 @@ import { TOKEN_CONTRACT } from "constants/addresses";
 import { BigNumber } from "ethers";
 import { Address } from "wagmi";
 import { SUBGRAPH_ENDPOINT } from "constants/urls";
+import { zeroAddress } from "viem";
 
 export type Bid = {
   bidder: Address;
@@ -53,25 +54,44 @@ export const getCurrentAuction = async ({ address }: { address: string }) => {
   } as AuctionInfo;
 };
 
-export const getPreviousAuctions = async ({ address }: { address: string }) => {
-  const auctionContract = auction({ address });
-  const filter = auctionContract.filters.AuctionSettled(null, null, null);
-  const events = await auctionContract.queryFilter(filter);
+export const getPreviousAuction = async ({
+  address,
+  tokenId,
+}: {
+  address: string;
+  tokenId: string;
+}) => {
+  const query: TypedDocumentNode<
+    { auction?: { winningBid?: { amount: string; bidder: string } } },
+    { id: string }
+  > = parse(gql`
+    query previousAuction($id: ID!) {
+      auction(id: $id) {
+        winningBid {
+          amount
+          bidder
+        }
+      }
+    }
+  `);
 
-  const previousAuctions: PreviousAuction[] = [];
+  const client = new GraphQLClient(SUBGRAPH_ENDPOINT);
+  const id = `${address.toLowerCase()}:${Number(tokenId)}`;
 
-  for (let event of events) {
-    const tokenId = event.args?.tokenId.toHexString();
-    const bids = await getBidHistory({ tokenId: BigNumber.from(tokenId) });
-    previousAuctions.push({
-      tokenId: tokenId,
-      winner: event.args?.winner,
-      amount: event.args?.amount.toHexString(),
-      bids,
-    } as PreviousAuction);
-  }
+  const auctionResp = await client.request({
+    document: query,
+    variables: { id },
+  });
+  const bids = await getBidHistory({ tokenId: BigNumber.from(tokenId) });
 
-  return previousAuctions;
+  return auctionResp.auction
+    ? ({
+        tokenId,
+        winner: auctionResp.auction?.winningBid?.bidder ?? zeroAddress,
+        amount: auctionResp.auction?.winningBid?.amount ?? "0",
+        bids,
+      } as PreviousAuction)
+    : undefined;
 };
 
 export async function getBidHistory({ tokenId }: { tokenId: BigNumber }) {

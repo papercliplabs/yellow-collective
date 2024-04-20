@@ -8,7 +8,7 @@ import { PlaceBid } from "./PlaceBid";
 import { useEffect, useState } from "react";
 import { AuctionInfo } from "@/services/nouns-builder/auction";
 import { ContractInfo } from "@/services/nouns-builder/token";
-import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
+import { usePreviousAuction } from "@/hooks/fetch/usePreviousAuctions";
 import { useRouter } from "next/router";
 import Button from "../Button";
 import clsx from "clsx";
@@ -16,6 +16,7 @@ import { getAddress, zeroAddress } from "viem";
 import { formatNumber } from "@/utils/formatNumber";
 import BidHistory from "./BidHistory";
 import WalletInfo from "../WalletInfo";
+import { auction } from "@/services/nouns-builder";
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
@@ -134,10 +135,9 @@ const EndedAuction = ({
   owner?: `0x${string}`;
   hidden: boolean;
 }) => {
-  const { data } = usePreviousAuctions({ auctionContract });
-  const auctionData = data?.find((auction) =>
-    compareAddress(auction.tokenId, tokenId)
-  );
+  const { data: auctionData } = usePreviousAuction({
+    tokenId,
+  });
 
   return (
     <div className="flex flex-col items-start">
