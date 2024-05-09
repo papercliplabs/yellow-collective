@@ -15,6 +15,7 @@ import clsx from "clsx";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { track } from "@vercel/analytics";
 import ExternalLink from "../ExternalLink";
+import { auctionAbi } from "abis/auction";
 
 export const PlaceBid = ({
   highestBid,
@@ -37,9 +38,12 @@ export const PlaceBid = ({
 
   const { config, error } = usePrepareContractWrite({
     address: auction as Address,
-    abi: AuctionABI,
-    functionName: "createBid",
-    args: [BigNumber.from(tokenId || 1)],
+    abi: auctionAbi,
+    functionName: "createBidWithReferral",
+    args: [
+      BigNumber.from(tokenId || 1),
+      "0x1C937764e433878c6eB1820bC5a1A42c6f25dA81",
+    ],
     overrides: {
       value: utils.parseEther(debouncedBid || "0"),
     },
