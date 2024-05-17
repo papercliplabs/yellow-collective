@@ -22,6 +22,8 @@ import Image from "next/image";
 import Banner from "@/components/Banner";
 import Faq from "@/components/Faq";
 import Description from "@/components/Description";
+import { getFrameMetadata } from "frog/next";
+import Head from "next/head";
 
 type MarkdownSource = MDXRemoteSerializeResult<Record<string, unknown>>;
 
@@ -34,6 +36,7 @@ export const getStaticProps = async (): Promise<
     auction: AuctionInfo;
     descriptionSource: MarkdownSource;
     faqSources: MarkdownSource[];
+    frameTags: Record<string, string>;
   }>
 > => {
   // Get token and auction info
@@ -91,6 +94,15 @@ export const getStaticProps = async (): Promise<
 
   if (!contract.image) contract.image = "";
 
+  const frameMetadata = await getFrameMetadata(
+    `https://frames.paperclip.xyz/nounish-auction/yellow-collective`
+  );
+
+  // Only take fc:frame tags (not og image overrides)
+  const filteredFrameMetadata = Object.fromEntries(
+    Object.entries(frameMetadata).filter(([k]) => k.includes("fc:frame"))
+  );
+
   return {
     props: {
       tokenContract,
@@ -100,6 +112,7 @@ export const getStaticProps = async (): Promise<
       auction,
       descriptionSource: descMD,
       faqSources,
+      frameTags: filteredFrameMetadata,
     },
     revalidate: 60,
   };
@@ -113,6 +126,7 @@ export default function SiteComponent({
   auction,
   descriptionSource,
   faqSources,
+  frameTags,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const isMounted = useIsMounted();
 
@@ -128,6 +142,11 @@ export default function SiteComponent({
         },
       }}
     >
+      <Head>
+        {Object.entries(frameTags).map(([property, content]) => (
+          <meta property={property} content={content} />
+        ))}
+      </Head>
       <div className="bg-accent min-h-screen flex flex-col items-center justify-start w-screen">
         <Banner />
         <Header />
