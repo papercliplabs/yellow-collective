@@ -38,7 +38,7 @@ export const getStaticProps = async (): Promise<
     getAddresses({ tokenAddress: tokenContract }),
     getContractInfo({ address: tokenContract }),
     getFrameMetadata(
-      `https://frames.paperclip.xyz/nounish-auction/yellow-collective`
+      `https://frames.paperclip.xyz/nounish-auction/v2/nouns-builder/yellow-collective`
     ),
   ]);
 
