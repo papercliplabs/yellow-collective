@@ -24,6 +24,7 @@ export type AuctionInfo = {
   endTime: number;
   settled: boolean;
   bids: Bid[];
+  elapsedTime: number;
 };
 
 export type PreviousAuction = {

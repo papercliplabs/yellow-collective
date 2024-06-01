@@ -12,17 +12,19 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-accent-blue text-white hover:bg-[#319CFF] shadow-[0px_4.02px_0px_0px_#0464BC] active:translate-y-1",
+          "bg-[--brand-text-main] text-[--brand-background-main] border-[--brand-text-main] border-2 hover:bg-[--brand-background-secondary-tran-2] hover:border-[--brand-text-main] hover:text-[--brand-text-main]  active:translate-y-1",
         secondary:
-          "bg-primary text-primary hover:bg-secondary shadow-[0px_4.02px_0px_0px_#BBB] active:translate-y-1",
+          "text-[--brand-text-main] border-[--brand-text-main] border hover:bg-[--brand-background-secondary-tran-2]  active:translate-y-1",
         negative:
-          "bg-negative text-white hover:bg-negative/80 shadow-[0px_4.02px_0px_0px_#bd1c11] active:translate-y-1",
+          "bg-negative text-white hover:bg-negative/80  active:translate-y-1",
         outline:
-          "bg-transparent border-primary border-2 text-primary hover:bg-[#181818]/10 py-[13px]",
+          "bg-transparent border-[--brand-text-main] border text-primary hover:bg-[--brand-background-secondary-tran-2] py-[13px]",
+        footer:
+          "hover:bg-[--brand-text-main]"
       },
       size: {
-        default: "px-6 py-[15px] rounded-[18px]",
-        tight: "p-4 rounded-[18px]",
+        default: "px-6 py-[15px]",
+        tight: "p-4",
         icon: "px-[10px] py-[6px] rounded-[18px]",
         rounded: "p-[12px] rounded-full",
       },

@@ -1,0 +1,20 @@
+:root {
+    --brand-background-main: #169C0F;
+    --brand-background-secondary: #0f4a0c;
+    --brand-background-secondary-tran: #0f4a0ce0;
+    --brand-background-secondary-tran-2: #0f4a0c70;
+    --brand-text-main: #F4F4ED;
+    --brand-text-secondary: #313F34;
+    --brand-text-black: #0D0C0C;
+    --brand-red: #e00e0e;
+
+    --brand-pending: #ffcc00;
+    --brand-active: #03e70e;
+    --brand-canceled: #a71515;
+    --brand-defeated: #ff0000;
+    --brand-succeeded: #169C0F;
+    --brand-queued: #ff7700;
+    --brand-expired: #5a0303;
+    --brand-executed: #044d11;
+    --brand-vetoed: #121212;
+}

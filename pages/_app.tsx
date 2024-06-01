@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import '../styles/color.css';
 import type { AppProps } from "next/app";
 import { WagmiConfig } from "wagmi";
 import { wagmiClient, chains } from "../configs/wallet";
@@ -34,7 +35,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <Head>
-            <meta property="og:title" content="Yellow Collective" />
+            <meta property="og:title" content="Coppa Nouns" />
             <meta
               property="og:description"
               content="A club on the BASE Ethereum L2 network, designed to support and empower artists and creatives in the Nouns and Superchain ecosystems"

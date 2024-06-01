@@ -51,6 +51,19 @@ export const getStaticProps = async (): Promise<
 
   if (!contract.image) contract.image = "";
 
+
+  if (token.name === undefined) {
+    token.name = ""; // or a default value
+  }
+
+  if (token.image === undefined) {
+    token.image = ""; // or a default value
+  }
+
+  if (token.owner === undefined) {
+    token.owner = `0x0000000000000000000000000000000000000000`; // or a default value
+  }
+
   // Only take fc:frame tags (not og image overrides)
   const filteredFrameMetadata = frameMetadata.filter((entry) =>
     entry.property.includes("fc:frame")
@@ -95,10 +108,15 @@ export default function SiteComponent({
         ))}
       </Head>
       {isMounted && (
-        <div className="bg-accent min-h-screen flex flex-col items-center justify-start w-screen">
-          <Banner />
+        <div
+          className="min-h-screen flex flex-col items-center justify-start w-screen"
+          style={{
+            color: "var(--brand-text-main)",
+            backgroundColor: "var(--main-background-color)",
+          }}
+        >
           <Header />
-          <Hero />
+          <Hero  />
           <Description />
           <Faq />
           <Footer />

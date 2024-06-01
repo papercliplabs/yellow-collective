@@ -48,7 +48,7 @@ export default function Create() {
           <div className="flex items-center">
             <Link
               href="/vote"
-              className="flex items-center border border-skin-stroke hover:bg-skin-muted rounded-full p-2 mr-4"
+              className="flex items-center border border-skin-stroke  rounded-full p-2 mr-4"
             >
               <ArrowLeftIcon className="h-4" />
             </Link>
@@ -70,7 +70,7 @@ export default function Create() {
                 <Field
                   name="title"
                   placeholder="My New Proposal"
-                  className="bg-skin-muted text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
+                  className=" text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
                 />
 
                 <label className="relative text-md font-heading text-skin-base mt-6">
@@ -95,7 +95,7 @@ export default function Create() {
                           <Field
                             name={`transactions[${index}].address`}
                             placeholder="0x04bfb0034F24E..."
-                            className="bg-skin-muted text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
+                            className=" text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
                           />
 
                           <label className="text-sm mt-4">Value</label>
@@ -104,9 +104,9 @@ export default function Create() {
                               name={`transactions.${index}.valueInETH`}
                               placeholder="0.1"
                               type="number"
-                              className="bg-skin-muted text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-l-lg w-full text-md focus:outline-none"
+                              className="text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-l-lg w-full text-md focus:outline-none"
                             />
-                            <label className="bg-skin-muted h-12 flex items-center border-l px-4">
+                            <label className=" h-12 flex items-center border-l px-4">
                               ETH
                             </label>
                           </div>
@@ -117,7 +117,7 @@ export default function Create() {
                         onClick={() =>
                           arrayHelpers.push({ address: "", valueInETH: 0 })
                         }
-                        className={`bg-skin-muted text-skin-muted rounded-lg text-md w-full h-12 flex items-center justify-around`}
+                        className={`text-skin-muted rounded-lg text-md w-full h-12 flex items-center justify-around`}
                       >
                         Add Transaction
                       </button>

@@ -8,6 +8,7 @@ import Button from "./Button";
 import { useBalance } from "wagmi";
 import { formatNumber } from "@/utils/formatNumber";
 import { BigNumber, ethers } from "ethers";
+import { CountUpDisplay } from "./CountUpDisplay";
 
 export default function Header() {
   const { data: addresses } = useDAOAddresses({
@@ -20,6 +21,7 @@ export default function Header() {
   const { data: multisigBalanceData } = useBalance({
     address: BASED_AND_YELLOW_MULTISIG,
   });
+  
 
   return (
     <div className="flex items-center justify-between w-full px-4 md:px-10 py-2 h-[80px] gap-2">
@@ -27,26 +29,28 @@ export default function Header() {
         <Link href="/">
           <Image src="/noggles.svg" width={80} height={30} alt="Yellow" />
         </Link>
+        <div>
         <Button variant="outline" size="tight">
           <Link
             href={`${ETHERSCAN_BASEURL}/tokenholdings?a=${addresses?.treasury}`}
             rel="noreferer noopener noreferrer"
             target="_blank"
           >
-            <h6>
-              Ξ{" "}
+            <h6 className="text-[--brand-text-main]">
+              Treasury:{" "}Ξ{" "}
               {treasury
                 ? formatNumber(ethers.utils.formatEther(treasury), 2)
                 : "0"}
               {(multisigBalanceData?.value ?? BigNumber.from(0)) >
-                BigNumber.from(1000) &&
-                " + " + formatNumber(multisigBalanceData?.formatted, 2)}
+                BigNumber.from(1000)}
             </h6>
           </Link>
         </Button>
+         {/* <CountUpDisplay to={auctionInfo?.startTime || "0"} />   */}
+        </div>
       </div>
 
-      <CustomConnectButton className="bg-skin-backdrop px-6 h-10 rounded-xl border border-skin-stroke text-skin-base transition ease-in-out hover:scale-110" />
+      <CustomConnectButton className="px-6 h-10 border  transition ease-in-out hover:scale-110" />
     </div>
   );
 }

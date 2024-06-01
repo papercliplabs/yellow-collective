@@ -12,6 +12,7 @@
 
   html,
   body {
+    background-color: var(--brand-background-main);
     @apply w-screen overflow-x-hidden text-primary;
   }
 

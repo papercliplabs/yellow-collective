@@ -14,6 +14,7 @@ import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
 import { Fragment } from "react";
 import { useUserVotes } from "@/hooks/fetch/useUserVotes";
 import { useCurrentThreshold } from "@/hooks/fetch/useCurrentThreshold";
+import bgImage from "./../nounishpitch.png";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
@@ -60,8 +61,8 @@ export default function Vote({
 
   return (
     <Layout>
-      <div className="text-2xl relative font-heading text-skin-muted">
-        Governance
+      <div className="text-2xl relative font-heading text-[--brand-text-secondary]">
+        Live Games
       </div>
 
       <div className="h-full w-full wrapper focus:outline-none pt-4 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
@@ -70,26 +71,25 @@ export default function Vote({
 
       <div className="border border-skin-stroke rounded-2xl py-6 sm:py-0 px-6 mt-6 flex flex-col sm:flex-row sm:items-center justify-between sm:h-32">
         <div className="sm:py-6 h-full">
-          <div className="font-heading text-2xl text-skin-muted">Treasury</div>
-          <div className="text-4xl font-bold font-heading mt-2 text-skin-base">
+          <div className="font-heading text-2xl text-[--brand-text-secondary]">Treasury</div>
+          <div className="text-4xl font-bold font-heading mt-2 text-[--brand-text-main]">
             Ξ {treasuryBalance ? formatTreasuryBalance(treasuryBalance) : "0"}
           </div>
         </div>
-        <div className="sm:w-1/3 mt-4 sm:mt-0 sm:border-l border-skin-stroke sm:pl-6 h-full flex items-center text-skin-muted">
-          This treasury exists for DAO participants to allocate resources for
-          the long-term growth and prosperity of the project.
+        <div className="sm:w-1/3 mt-4 sm:mt-0 sm:border-l border-skin-stroke sm:pl-6 h-full flex items-center text-[--brand-text-main]">
+          This treasury exists for real life tournoments, to be paid to the Coppa Nouns holders of winning countries.
         </div>
       </div>
 
       <div className="mt-12">
         <div className="flex items-center justify-between">
-          <div className="text-4xl font-heading text-skin-base">Proposals</div>
+          <div className="text-4xl font-heading text-[--brand-text-main]">Games</div>
           {userVotes && userVotes >= (currentThreshold || 0) ? (
             <Link
               href={"/create-proposal"}
-              className="text-sm bg-skin-muted hover:bg-skin-button-accent-hover hover:text-skin-inverted text-skin-muted w-36 h-8 rounded-lg flex items-center justify-around"
+              className="text-sm hover:bg-skin-button-accent-hover hover:text-skin-inverted text-[--brand-text-main] w-36 h-8 rounded-lg flex items-center justify-around"
             >
-              Submit proposal
+              Submit game
             </Link>
           ) : (
             <Fragment />
@@ -119,11 +119,11 @@ const ProposalPlacard = ({
   return (
     <Link
       href={`/vote/${proposal.proposalId}`}
-      className="flex items-center justify-between w-full bg-skin-muted hover:bg-skin-backdrop border border-skin-stroke p-4 my-6 rounded-2xl"
+      className="flex items-center justify-between w-full hover:bg-[--brand-background-secondary-tran-2] border border-[--brand-text-main] p-4 my-6 rounded-2xl"
     >
       <div className="flex items-center pr-4">
-        <div className="text-xl font-semibold text-skin-base">
-          <span className="text-skin-muted mr-3 sm:mr-4 sm:ml-2">
+        <div className="text-xl font-semibold text-[--brand-text-main]">
+          <span className="text-[--brand-text-main] mr-3 sm:mr-4 sm:ml-2">
             {proposalNumber}
           </span>
           {getProposalName(proposal.description)}

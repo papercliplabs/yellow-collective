@@ -91,7 +91,7 @@ export default function ProposalComponent() {
           <div className="">
             <div className="flex items-center">
               <div className="font-heading text-2xl text-skin-muted mr-4 break-words">
-                Proposal {proposalNumber}
+                Game {proposalNumber}
               </div>
               <ProposalStatus proposal={proposal} />
             </div>
@@ -116,7 +116,7 @@ export default function ProposalComponent() {
       </div>
 
       <div className="items-center w-full grid grid-cols-3 gap-4 mt-12">
-        <div className="w-full bg-skin-muted border border-skin-stroke rounded-xl p-6">
+        <div className="w-full border border-skin-stroke rounded-xl p-6">
           <ProgressBar
             label="For"
             type="success"
@@ -124,7 +124,7 @@ export default function ProposalComponent() {
             percentage={getVotePercentage(forVotes)}
           />
         </div>
-        <div className="w-full bg-skin-muted border border-skin-stroke rounded-xl p-6">
+        <div className="w-full  border border-skin-stroke rounded-xl p-6">
           <ProgressBar
             label="Against"
             type="danger"
@@ -132,7 +132,7 @@ export default function ProposalComponent() {
             percentage={getVotePercentage(againstVotes)}
           />
         </div>
-        <div className="w-full bg-skin-muted border border-skin-stroke rounded-xl p-6">
+        <div className="w-full border border-skin-stroke rounded-xl p-6">
           <ProgressBar
             label="Abstain"
             type="muted"

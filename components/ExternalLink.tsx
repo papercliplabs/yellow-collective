@@ -13,6 +13,7 @@ export default function ExternalLink({ href, children }: ExternalLinkProps) {
       rel="noreferer noopener noreferrer"
       target="_blank"
       className="text-accent-blue hover:brightness-75"
+      style={{color: "var(--brand-text-secondary)"}}
     >
       {children}
     </Link>

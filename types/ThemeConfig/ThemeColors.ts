@@ -1,5 +1,4 @@
 import { RGBType } from "./RBGType";
-
 export type ThemeColors = {
   fill?: RGBType;
   muted?: RGBType;
