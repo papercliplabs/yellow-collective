@@ -17,7 +17,13 @@
   }
 
   h1 {
-    @apply text-[48px] leading-[56px] md:text-[56px] md:leading-[64px] font-bold;
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 56px;
+      line-height: 64px;
+    }
   }
 
   h2 {
@@ -53,6 +59,17 @@
   .clickable-active {
     @apply brightness-[85%] scale-[98%] ease-in-out;
   }
+
+  .text-indent{
+    text-indent: 2.5em;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mobile-fix {
+    display: block !important;
+    margin-top: 50px
+  }
 }
 
 @layer site {
@@ -66,5 +83,6 @@
   /* Firefox */
   input[type="number"] {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
 }

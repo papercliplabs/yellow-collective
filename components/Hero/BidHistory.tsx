@@ -74,7 +74,7 @@ export default function BidHistory({
                   className=" border-transparent/10 border-2"
                 />
                 <div className="flex flex-col items-start">
-                  <h6 className="text-[--brand-text-black]">Bids for</h6>
+                  <h6 className="text-[--brand-text-fourth]">Bids for</h6>
                   <h5>Coppa Noun #{parseInt(tokenId, 16)}</h5>
                 </div>
               </div>

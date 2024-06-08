@@ -11,6 +11,3 @@ export const MANAGER_CONTRACT = {
   "84532": "0x550c326d688fd51ae65ac6a2d48749e631023a03",
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
-export const BASED_AND_YELLOW_MULTISIG = getAddress(
-  "0x0b379F1848fA2aab7790966373618F4B0Fea6A6e"
-);

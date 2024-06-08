@@ -20,12 +20,12 @@ const buttonVariants = cva(
         outline:
           "bg-transparent border-[--brand-text-main] border text-primary hover:bg-[--brand-background-secondary-tran-2] py-[13px]",
         footer:
-          "hover:bg-[--brand-text-main]"
+          "hover:border"
       },
       size: {
         default: "px-6 py-[15px]",
         tight: "p-4",
-        icon: "px-[10px] py-[6px] rounded-[18px]",
+        icon: "px-[10px] py-[6px]",
         rounded: "p-[12px] rounded-full",
       },
     },

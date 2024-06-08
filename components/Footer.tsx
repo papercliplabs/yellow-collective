@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const navItems = [
   {
-    href: "https://warpcast.com/~/channel/yellow",
+    href: "https://warpcast.com/~/channel/coppanouns",
     src: "/farcaster.svg",
   },
   {

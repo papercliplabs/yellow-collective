@@ -12,18 +12,23 @@ const faqItems: FaqItem[] = [
     title: "How the games work:",
     content: (
       <>
-        <p>
-          80% of all auctions go towards real world tournaments.
-        </p>
         <p>  
-           During major tournaments, like the World Cup, UEFA Euro, and Copa America,
-          games will be choosen by the founders but will consist of group play winners, knockout rounds, and the final, and will also be dependent on wwhich countries have been minted. (i.e. if a particual country has not been minted, their game wont be selected.)
-          If you mint or buy a Coppa Noun anytime during the tournament, you will automaticly qualify for rewards for that country, include previous games.
+          During major tournaments, like the World Cup, UEFA Euros, and Copa America, owners of Coppa Nouns have the chance to win ETH if they hold a Coppa Noun from a winning country.
+          If you mint or buy a Coppa Noun anytime during the tournament, you will automaticly qualify for rewards for that country. A screenshot will be taken of at the kick-off of the final, so you will need to mint or buy your Coppa Noun before kick-off.
+          The winnings will be split between how many holders of that country there are.
         </p>
         <p>
-         Weights will be added to the games, with the final recieving the most rewards and group winners receiving the lowest amount. 
-        Thw winnings will then be split between the owners of the winning country.
-        </p>
+          For the Euros and Copa America, there will be a .5 ETH price pool for both tournaments. For each tounroment, rewards will be given out for 1st, 2nd, and 3rd. place:
+          </p>
+          <ul className="text-indent">
+            1st place: 60% of the pool
+          </ul>
+          <ul className="text-indent">
+            2nd place: 30% of the pool
+          </ul>
+          <ul className="text-indent">
+            3rd place: 10% of the pool
+          </ul>
         <p>
          The rewards will be paid out once the final has been played and a winning country has been decided. Minting will continue through the tournament.
          </p>

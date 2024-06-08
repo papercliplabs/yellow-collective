@@ -110,5 +110,5 @@ export const CountUpDisplay: React.FC<CountUpDisplayProps> = (
     timeString = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   }
 
-  return <h3>{timeString || "0s"}</h3>;
+  return <h6>{timeString || "0s"}</h6>;
 };

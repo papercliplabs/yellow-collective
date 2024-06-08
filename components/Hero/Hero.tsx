@@ -1,7 +1,6 @@
 import { BigNumber, ethers, utils } from "ethers";
 import Image from "next/image";
 import { CountdownDisplay } from "../CountdownDisplay";
-import { CountUpDisplay } from "../CountUpDisplay";
 import { useCurrentAuctionInfo, useContractInfo, useTokenInfo } from "hooks";
 import { compareAddress } from "@/utils/compareAddress";
 import { SettleAuction } from "./SettleAuction";
@@ -55,7 +54,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="bg-transparent max-w-[374px] md:max-w-[500px] lg:max-w-6xl lg:w-[1100px] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-start py-[48px] md:py-[64px] gap-8 md:gap-16 px-4 md:px-10">
+    <div className="max-w-[374px] md:max-w-[500px] lg:max-w-6xl lg:w-[1100px] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-start py-[48px] md:py-[64px] gap-8 md:gap-16 px-4 md:px-10">
       <div className="h-[342px] w-[342px] md:w-[420px] md:h-[420px] relative shrink-0  border-[10px] border-[--brand-text-main] overflow-hidden  flex justify-center items-center">
         {tokenInfo && (
           <Image
@@ -71,7 +70,6 @@ export default function Hero() {
           alt="loading"
           fill
           className={clsx(
-            "bg-main",
             tokenInfo && imageLoaded ? "invisible" : "visible"
           )}
         />
@@ -237,16 +235,6 @@ const CurrentAuction = ({
             <CountdownDisplay to={auctionInfo?.endTime || "0"} />    
           )}
         </div>
-        {/* <div className="flex flex-col gap-2">
-          <div style={{color: "var(--brand-text-secondary)"}}  className="font-light">
-            Kick-off:
-          </div>
-          {auctionOver ? (
-            "Auction ended"
-          ) : (
-          <CountUpDisplay to={auctionInfo?.startTime || "0"} />  
-          )}
-             </div> */}
       </div>
 
       <SettleAuction

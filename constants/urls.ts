@@ -19,11 +19,11 @@ export const SUBGRAPH_ENDPOINT = {
   "8453":
     "https://api.goldsky.com/api/public/project_clkk1ucdyf6ak38svcatie9tf/subgraphs/nouns-builder-base-mainnet/stable/gn",
   "84532":
-    "https://api.goldsky.com/api/public/project_clkk1ucdyf6ak38svcatie9tf/subgraphs/nouns-builder-base-testnet/stable/gn",
+    "https://api.goldsky.com/api/public/project_clkk1ucdyf6ak38svcatie9tf/subgraphs/nouns-builder-base-sepolia/stable/gn",
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
 export const ETHER_ACTOR_BASEURL = "https://ether.actor";
 export const IPFS_GATEWAY =
   process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://gateway.pinata.cloud/ipfs/";
 
-export const FARCASTER_URL = "https://warpcast.com/~/channel/yellow";
+export const FARCASTER_URL = "https://warpcast.com/~/channel/coppanouns";

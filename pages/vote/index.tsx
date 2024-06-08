@@ -14,7 +14,6 @@ import { formatTreasuryBalance } from "@/utils/formatTreasuryBalance";
 import { Fragment } from "react";
 import { useUserVotes } from "@/hooks/fetch/useUserVotes";
 import { useCurrentThreshold } from "@/hooks/fetch/useCurrentThreshold";
-import bgImage from "./../nounishpitch.png";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
@@ -65,7 +64,7 @@ export default function Vote({
         Live Games
       </div>
 
-      <div className="h-full w-full wrapper focus:outline-none pt-4 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
+      <div className="text-[--brand-text-main] h-full w-full wrapper focus:outline-none pt-4 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
         <MDXRemote {...descriptionSource} />
       </div>
 
@@ -105,7 +104,7 @@ export default function Vote({
           ))}
         </div>
       </div>
-    </Layout>
+    </Layout>   
   );
 }
 
@@ -121,7 +120,7 @@ const ProposalPlacard = ({
       href={`/vote/${proposal.proposalId}`}
       className="flex items-center justify-between w-full hover:bg-[--brand-background-secondary-tran-2] border border-[--brand-text-main] p-4 my-6 rounded-2xl"
     >
-      <div className="flex items-center pr-4">
+      <div className="text-[--brand-text-main] flex items-center pr-4">
         <div className="text-xl font-semibold text-[--brand-text-main]">
           <span className="text-[--brand-text-main] mr-3 sm:mr-4 sm:ml-2">
             {proposalNumber}

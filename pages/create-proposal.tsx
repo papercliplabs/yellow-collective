@@ -30,6 +30,7 @@ import { Fragment } from "react";
 import { TOKEN_CONTRACT } from "constants/addresses";
 import { useUserVotes } from "@/hooks/fetch/useUserVotes";
 import { useCurrentThreshold } from "@/hooks/fetch/useCurrentThreshold";
+
 interface Transaction {
   address: string;
   valueInETH: number;
@@ -48,12 +49,12 @@ export default function Create() {
           <div className="flex items-center">
             <Link
               href="/vote"
-              className="flex items-center border border-skin-stroke  rounded-full p-2 mr-4"
+              className="flex items-center border border-skin-stroke hover:bg-skin-muted rounded-full p-2 mr-4"
             >
               <ArrowLeftIcon className="h-4" />
             </Link>
 
-            <div className="text-2xl sm:text-4xl font-bold relative font-heading text-skin-base">
+            <div className="text-2xl sm:text-4xl font-bold relative font-heading text-[--brand-text-main]">
               Create your proposal
             </div>
           </div>
@@ -63,17 +64,17 @@ export default function Create() {
             onSubmit={() => {}}
             render={({ values }) => (
               <Form className="mt-6 flex flex-col w-full">
-                <label className="relative text-md font-heading text-skin-base">
+                <label className="relative text-md font-heading text-[--brand-text-main]">
                   Proposal title
                 </label>
 
                 <Field
                   name="title"
                   placeholder="My New Proposal"
-                  className=" text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
+                  className="bg-skin-muted text-[--brand-text-secondary]  placeholder:text-[--brand-text-third]  px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
                 />
 
-                <label className="relative text-md font-heading text-skin-base mt-6">
+                <label className="relative text-md font-heading text-[--brand-text-main] mt-6">
                   Transactions
                 </label>
 
@@ -87,7 +88,7 @@ export default function Create() {
                           className="mb-4 border p-4 rounded-md flex flex-col"
                         >
                           <div className="flex items-center justify-between">
-                            <label className="text-sm w-52">Recipent</label>
+                            <label className="text-sm text-[--brand-text-main] w-52">Recipent</label>
                             <button onClick={() => arrayHelpers.remove(index)}>
                               <XMarkIcon className="h-6" />
                             </button>
@@ -95,18 +96,18 @@ export default function Create() {
                           <Field
                             name={`transactions[${index}].address`}
                             placeholder="0x04bfb0034F24E..."
-                            className=" text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
+                            className="bg-skin-muted text-[--brand-text-secondary] e placeholder:text-[--brand-text-third]  px-3 py-3 rounded-lg w-full text-md mt-2 focus:outline-none"
                           />
 
-                          <label className="text-sm mt-4">Value</label>
+                          <label className="text-sm text-[--brand-text-main] mt-4">Value</label>
                           <div className="flex items-center mt-2">
                             <Field
                               name={`transactions.${index}.valueInETH`}
                               placeholder="0.1"
                               type="number"
-                              className="text-skin-base placeholder:text-skin-muted px-3 py-3 rounded-l-lg w-full text-md focus:outline-none"
+                              className="bg-skin-muted text-[--brand-text-secondary]  placeholder:text-[--brand-text-third]  px-3 py-3 rounded-l-lg w-full text-md focus:outline-none"
                             />
-                            <label className=" h-12 flex items-center border-l px-4">
+                            <label className="bg-skin-muted h-12 flex items-center border-l px-4">
                               ETH
                             </label>
                           </div>
@@ -117,12 +118,12 @@ export default function Create() {
                         onClick={() =>
                           arrayHelpers.push({ address: "", valueInETH: 0 })
                         }
-                        className={`text-skin-muted rounded-lg text-md w-full h-12 flex items-center justify-around`}
+                        className={`bg-skin-muted text-[--brand-text-secondary]  rounded-lg text-md w-full h-12 flex items-center justify-around`}
                       >
                         Add Transaction
                       </button>
 
-                      <div className="mt-6 text-sm text-skin-muted">
+                      <div className="mt-6 text-sm text-[--brand-text-secondary] ">
                         Add one or more transactions and describe your proposal
                         for the community. The proposal cannot modified after
                         submission, so please verify all information before
@@ -132,7 +133,7 @@ export default function Create() {
                   )}
                 />
 
-                <label className="relative text-md font-heading text-skin-base mt-6">
+                <label className="relative text-md font-heading text-[--brand-text-main]  mt-6">
                   Summary
                 </label>
 

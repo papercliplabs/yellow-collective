@@ -1,9 +1,7 @@
 import Header from "../components/Header";
 import { useIsMounted } from "hooks/useIsMounted";
-import { Fragment } from "react";
 import Hero from "../components/Hero/Hero";
 import { GetStaticPropsResult, InferGetStaticPropsType } from "next";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { SWRConfig } from "swr";
 import {
   ContractInfo,
@@ -112,8 +110,7 @@ export default function SiteComponent({
           className="min-h-screen flex flex-col items-center justify-start w-screen"
           style={{
             color: "var(--brand-text-main)",
-            backgroundColor: "var(--main-background-color)",
-          }}
+            }}
         >
           <Header />
           <Hero  />
