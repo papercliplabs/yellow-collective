@@ -14,9 +14,14 @@ export default function Description() {
               The Beautiful Game: On-Chian
             </h2>
             <p>
-            Coppa Nouns are the fútbal loving <ExternalLink  href="https://nouns.wtf/" > Nouns </ExternalLink>
-            darivative, attempt to bring the love of the beautiful game on-chain. Coppa Nouns are the newest way to support your National team and to get rewarded for doing so!
-          When you collect a Coppa Noun, you are not only supporting your favorite team, but you will also enter a very Nounish tournament. When the countries play games IRL during tournaments, the owns of the winning country will be rewarded with ETH from the treasury, specifical dedicated for real world Tournaments.
+            Coppa Nouns are the fútbol-loving <ExternalLink  href="https://nouns.wtf/" > Nouns </ExternalLink>
+            derivative, attempting to bring the love of the beautiful game on-chain. 
+            Coppa Nouns are the newest way to support your national team and get rewarded for doing so! When you collect a 
+            Coppa Noun, you are not only supporting your favorite team, but you will also enter a very Nounish tournament. 
+            When the countries play games in real-life tournaments, the owners of the winning country will be rewarded with 
+            ETH from the treasury, specifically dedicated for real-world tournaments.
+
+
             
             </p>
           
@@ -24,9 +29,11 @@ export default function Description() {
               Coppa Nouns Tournys for real world games:
             </h2>
             <p>
-              Coppa Nouns were original part of {" "}
+            Coppa Nouns were originally part of {" "}
               <ExternalLink href="https://www.footynouns.wtf/">Footy Nouns</ExternalLink>,
-              a <ExternalLink href="https://nouns.wtf"> Nouns</ExternalLink>{" "} derivative project released in 2021, but has found a new home here on Base!
+              a <ExternalLink href="https://nouns.wtf"> Nouns</ExternalLink>{" "} 
+              derivative project released in 2021, but they have found a new home here on Base!
+
             </p>
           </div>
         </div>

@@ -13,13 +13,17 @@ const faqItems: FaqItem[] = [
     content: (
       <>
         <p>  
-          During major tournaments, like the World Cup, UEFA Euros, and Copa America, owners of Coppa Nouns have the chance to win ETH if they hold a Coppa Noun from a winning country.
-          If you mint or buy a Coppa Noun anytime during the tournament, you will automaticly qualify for rewards for that country. A snapshot will be taken of at the kick-off of the final, so you will need to mint or buy your Coppa Noun before kick-off.
-          The winnings will be split between how many holders of that country there are.
+        During major tournaments like the World Cup, UEFA Euros, and Copa America, 
+        owners of Coppa Nouns have the chance to win ETH if they hold a Coppa Noun from a winning country. 
+        If you mint or buy a Coppa Noun anytime during the tournament, you will automatically qualify for rewards for that country. 
+        A snapshot will be taken at the kick-off of the final, so you will need to mint or buy your Coppa Noun before kick-off. 
+        The winnings will be split among the holders of that country.
+
+
         </p>
         <p>
-          For the Euros and Copa America, there will be a .5 ETH price pool for both tournaments. For each tounroment, rewards will be given out for 1st, 2nd, and 3rd. place:
-          </p>
+        For the Euros and Copa America, there will be a 0.5 ETH prize pool for both tournaments.
+         For each tournament, rewards will be given out for 1st, 2nd, and 3rd place:          </p>
           <ul className="text-indent">
             1st place: 60% of the pool
           </ul>
@@ -30,8 +34,9 @@ const faqItems: FaqItem[] = [
             3rd place: 10% of the pool
           </ul>
         <p>
-         The rewards will be paid out once the final has been played and a winning country has been decided. Minting will continue through the tournament.
-         </p>
+        The rewards will be paid out once the final has been played and a winning country has been decided. 
+        Minting will continue throughout the tournament.         
+        </p>
          </>
     ),
   },
@@ -40,9 +45,10 @@ const faqItems: FaqItem[] = [
     content: (
       <>
         <p>
-          Coppa Nouns would not exist without the <ExternalLink href="https://www.footynouns.wtf/">Footy Nouns</ExternalLink>. 
-          Footy Nouns originally launch in 2021 on Arbitrum. The art was then released to the community and Copppaa Nouns was born, finding a new home on base. 
-          While Coppa Nouns is not directly asssocite with Footy Nouns, we wont be here today if it wasnt for them.
+        Coppa Nouns would not exist without <ExternalLink href="https://www.footynouns.wtf/">Footy Nouns</ExternalLink>. 
+        Footy Nouns originally launched in 2021 on Arbitrum. 
+        The art was then released to the community and Coppa Nouns was born, finding a new home on Base. 
+        While Coppa Nouns is not directly associated with Footy Nouns, we wouldn’t be here today if it weren’t for them.
         </p>
       </>
     ),
