@@ -14,7 +14,7 @@ const faqItems: FaqItem[] = [
       <>
         <p>  
           During major tournaments, like the World Cup, UEFA Euros, and Copa America, owners of Coppa Nouns have the chance to win ETH if they hold a Coppa Noun from a winning country.
-          If you mint or buy a Coppa Noun anytime during the tournament, you will automaticly qualify for rewards for that country. A screenshot will be taken of at the kick-off of the final, so you will need to mint or buy your Coppa Noun before kick-off.
+          If you mint or buy a Coppa Noun anytime during the tournament, you will automaticly qualify for rewards for that country. A snapshot will be taken of at the kick-off of the final, so you will need to mint or buy your Coppa Noun before kick-off.
           The winnings will be split between how many holders of that country there are.
         </p>
         <p>
