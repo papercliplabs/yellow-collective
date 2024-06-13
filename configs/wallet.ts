@@ -51,7 +51,7 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "Yellow Collective",
+  appName: "Coppa Nouns",
   chains,
   projectId: "afb449b5b1ea52d11db1ec72bc452500",
 });

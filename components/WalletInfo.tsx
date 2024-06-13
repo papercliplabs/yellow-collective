@@ -1,4 +1,3 @@
-import useEnsWalletInfo from "@/hooks/fetch/useEnsName";
 import { shortenAddress } from "@/utils/shortenAddress";
 import { ethers } from "ethers";
 import { Address } from "wagmi";
@@ -9,9 +8,10 @@ import { useEffect, useMemo, useState } from "react";
 import useEnsName from "@/hooks/fetch/useEnsName";
 import useEnsAvatar from "@/hooks/fetch/useEnsAvatar";
 import clsx from "clsx";
+import { isAddress } from "viem";
 
 interface WalletInfoProps {
-  address?: Address;
+  address?: Address & { owner?: string }; // Update the type of address to include the owner property
   hideAvatar?: boolean;
   hideAddress?: boolean;
   disableEns?: boolean;
