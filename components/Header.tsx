@@ -5,9 +5,8 @@ import { ETHERSCAN_BASEURL } from "constants/urls";
 import CustomConnectButton from "./CustomConnectButton";
 import {TOKEN_CONTRACT } from "constants/addresses";
 import Button from "./Button";
-import { useBalance } from "wagmi";
 import { formatNumber } from "@/utils/formatNumber";
-import { BigNumber, ethers } from "ethers";
+import { ethers } from "ethers";
 import { CountUpDisplay } from "./CountUpDisplay";
 import React, { useEffect, useState } from 'react';
 import { useCurrentAuctionInfo,useContractInfo} from "hooks";
@@ -74,7 +73,7 @@ export default function Header() {
           <div className="flex-row flex whitespace-nowrap items-center justify-center w-full px-4 gap-2 bg-transparent border-[--brand-text-main] border py-[13px]">
             <h6 className="text-[--brand-text-main]">
               {auctionOver ? (
-              "Auction endend"
+              "Auction ended"
                 ) : (
                   <div className="items-center" >
                 <CountUpDisplay to={auctionInfo?.startTime || "0"} />  
