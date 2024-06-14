@@ -8,7 +8,6 @@ import {
   useAccount,
   Address,
 } from "wagmi";
-import { AuctionABI } from "@buildersdk/sdk";
 import { useDebounce } from "@/hooks/useDebounce";
 import Button from "../Button";
 import clsx from "clsx";
@@ -16,7 +15,6 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { track } from "@vercel/analytics";
 import ExternalLink from "../ExternalLink";
 import { auctionAbi } from "abis/auction";
-import { ClassNames } from "@emotion/react";
 
 export const PlaceBid = ({
   highestBid,

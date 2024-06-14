@@ -11,7 +11,7 @@ export default function Description() {
         <div style={{color: "var(--brand-text-main)"}} className="w-full flex justify-center pt-8">
           <div className="max-w-[720px] px-6 w-full flex flex-col gap-4">
             <h2>
-              The Beautiful Game: On-Chian
+              The Beautiful Game: On-Chain
             </h2>
             <p>
             Coppa Nouns are the fútbol-loving <ExternalLink  href="https://nouns.wtf/" > Nouns </ExternalLink>
