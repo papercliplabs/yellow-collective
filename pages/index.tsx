@@ -12,11 +12,9 @@ import {
 import { AuctionInfo, getCurrentAuction } from "data/nouns-builder/auction";
 import Footer from "@/components/Footer";
 import { getAddresses } from "@/services/nouns-builder/manager";
-import Banner from "@/components/Banner";
 import Faq from "@/components/Faq";
 import Description from "@/components/Description";
 import Head from "next/head";
-import { getFrameMetadata } from "@/utils/getFrameMetadata";
 
 export const getStaticProps = async (): Promise<
   GetStaticPropsResult<{
@@ -25,19 +23,16 @@ export const getStaticProps = async (): Promise<
     contract: ContractInfo;
     token: TokenInfo;
     auction: AuctionInfo;
-    frameTags: { property: string; content: string }[];
+
   }>
 > => {
   // Get token and auction info
   const tokenContract = process.env
     .NEXT_PUBLIC_TOKEN_CONTRACT! as `0x${string}`;
 
-  const [addresses, contract, frameMetadata] = await Promise.all([
+  const [addresses, contract] = await Promise.all([
     getAddresses({ tokenAddress: tokenContract }),
     getContractInfo({ address: tokenContract }),
-    getFrameMetadata(
-      `https://frames.paperclip.xyz/nounish-auction/v2/nouns-builder/yellow-collective`
-    ),
   ]);
 
   const auction = await getCurrentAuction({ address: addresses.auction });
@@ -62,11 +57,6 @@ export const getStaticProps = async (): Promise<
     token.owner = `0x0000000000000000000000000000000000000000`; // or a default value
   }
 
-  // Only take fc:frame tags (not og image overrides)
-  const filteredFrameMetadata = frameMetadata.filter((entry) =>
-    entry.property.includes("fc:frame")
-  );
-
   return {
     props: {
       tokenContract,
@@ -74,7 +64,6 @@ export const getStaticProps = async (): Promise<
       contract,
       token,
       auction,
-      frameTags: filteredFrameMetadata,
     },
     revalidate: 60,
   };
@@ -86,7 +75,6 @@ export default function SiteComponent({
   contract,
   token,
   auction,
-  frameTags,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const isMounted = useIsMounted();
 
@@ -100,11 +88,6 @@ export default function SiteComponent({
         },
       }}
     >
-      <Head>
-        {frameTags.map(({ property, content }, i) => (
-          <meta property={property} content={content} key={i} />
-        ))}
-      </Head>
       {isMounted && (
         <div
           className="min-h-screen flex flex-col items-center justify-start w-screen"
