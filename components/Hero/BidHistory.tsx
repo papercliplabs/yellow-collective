@@ -20,7 +20,7 @@ function BidRow({ bid, tight }: { bid: Bid; tight: boolean }) {
       <ExternalLink href={`${ETHERSCAN_BASEURL}/tx/${bid.transactionHash}`}>
         <div className="flex flex-row gap-2 items-center hover:opacity-70 transition-opacity">
           <h6  style={{color: "var(--brand-text-main)"}}>
-            Ξ {formatNumber(utils.formatEther(bid.bidAmount || "0"), 3)}
+            Ξ {formatNumber(utils.formatEther(bid.bidAmount || "0"), 4)}
           </h6>
           <Image
             src="/link.svg"

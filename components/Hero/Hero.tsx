@@ -149,7 +149,7 @@ const EndedAuction = ({
           <div style={{color: "var(--brand-text-secondary)"}} className="font-light">Winning Bid</div>
           <h3>
             {auctionData
-              ? `Ξ ${formatNumber(utils.formatEther(auctionData.amount || "0"), 3)}`
+              ? `Ξ ${formatNumber(utils.formatEther(auctionData.amount || "0"), 4)}`
               : "n/a"}
           </h3>
         </div>
