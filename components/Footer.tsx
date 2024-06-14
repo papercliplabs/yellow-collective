@@ -6,10 +6,6 @@ const navItems = [
   {
     href: "https://warpcast.com/~/channel/coppanouns",
     src: "/farcaster.svg",
-  },
-  {
-    href: "https://twitter.com/thenounsquare",
-    src: "/x.svg",
   }
 ];
 
