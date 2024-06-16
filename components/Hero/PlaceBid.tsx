@@ -63,7 +63,7 @@ export const PlaceBid = ({
 
   const highestBidBN = BigNumber.from(highestBid);
   const amountIncrease = highestBidBN.div("10");
-  const nextBidAmount = highestBidBN.add(amountIncrease);
+  const nextBidAmount = amountIncrease.isZero() ? BigNumber.from("5000000000000000") : highestBidBN.add(amountIncrease);
 
   const getError = () => {
     const minNextBid = utils.formatEther(nextBidAmount);

@@ -9,7 +9,7 @@ interface FaqItem {
 const faqItems: FaqItem[] = [
 
   {
-    title: "How the games work:",
+    title: "How the games work",
     content: (
       <>
         <p>  
@@ -46,9 +46,10 @@ const faqItems: FaqItem[] = [
       <>
         <p>
         Coppa Nouns would not exist without <ExternalLink href="https://www.footynouns.wtf/">Footy Nouns</ExternalLink>. 
-        Footy Nouns originally launched in 2021 on Arbitrum. 
-        The art was then released to the community and Coppa Nouns was born, finding a new home on Base. 
-        While Coppa Nouns is not directly associated with Footy Nouns, we wouldn’t be here today if it weren’t for them.
+        Footy Nouns was another football-centered Nouns derivative that launched on Arbitrum in 2021 that recently released the art to the community.
+        Coppa Nouns brought back the original art from the project, and brought a whole lot more with it.
+
+        While Coppa Nouns is not directly associated with Footy Nouns, we wouldn’t be here today without them.
         </p>
       </>
     ),
