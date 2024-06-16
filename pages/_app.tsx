@@ -44,7 +44,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <meta property="og:url" content="https://coppanouns.xyz/" />
             <meta
               property="og:image"
-              content={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/og-image.png`}
+              content={`https://coppanouns.xyz/og-image.png`}
             />
           </Head>
 
