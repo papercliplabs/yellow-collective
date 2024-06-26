@@ -53,6 +53,17 @@ export default function Hero() {
     });
   };
 
+  const imageName = tokenInfo?.image || "";
+  const startIndex = imageName.indexOf("kits%252f") + 9;
+  const imageSubstring = imageName.substring(startIndex);
+  const endIndex = imageSubstring.indexOf(".png%");
+  const finalImageSubstring = imageSubstring.substring(0, endIndex);
+
+  let countryName = finalImageSubstring.charAt(0).toUpperCase() + finalImageSubstring.slice(1);
+    if (countryName.endsWith('-2') || countryName.endsWith('-3')) {
+      countryName = countryName.slice(0, -2);
+    }
+
   return (
     <div className="max-w-[374px] md:max-w-[500px] lg:max-w-6xl lg:w-[1100px] flex flex-col justify-center items-center lg:flex-row lg:justify-start lg:items-start py-[48px] md:py-[64px] gap-8 md:gap-16 px-4 md:px-10">
       <div className="h-[342px] w-[342px] md:w-[420px] md:h-[420px] relative shrink-0  border-[10px] border-[--brand-text-main] overflow-hidden  flex justify-center items-center">
@@ -95,6 +106,8 @@ export default function Hero() {
         </div>
 
         <h1>Coppa Noun #{parseInt(tokenId, 16)}</h1>
+        <h4>Country: {countryName}</h4>
+
 
         <CurrentAuction
           auctionInfo={auctionInfo}
