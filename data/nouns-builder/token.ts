@@ -23,6 +23,7 @@ export type ContractInfo = {
 export type TokenInfo = {
   name: string;
   image: string;
+  countryName: string;
   owner: `0x${string}`;
 };
 
@@ -84,9 +85,24 @@ export const getTokenInfo = async ({
     console.error("getTokenInfo, subgraph error", tokenid);
   }
 
+  // Parse the country out of the image URL
+  const imageName = token?.image || "";
+  const startIndex = imageName.indexOf("kits%2f") + 7;
+  const imageSubstring = imageName.substring(startIndex);
+  const endIndex = imageSubstring.indexOf(".png&");
+  const finalImageSubstring = imageSubstring.substring(0, endIndex);
+
+  let countryName = finalImageSubstring.charAt(0).toUpperCase() + finalImageSubstring.slice(1);
+    if (countryName.endsWith('-2') || countryName.endsWith('-3')) {
+      countryName = countryName.slice(0, -2);
+    }
+
+    console.log(token?.image, countryName)
+
   return {
     name: token?.name,
     image: token?.image,
+    countryName,
     owner: token?.owner,
   } as TokenInfo;
 };
