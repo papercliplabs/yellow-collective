@@ -219,7 +219,6 @@ const CurrentAuction = ({
   }, [auctionInfo]);
 
 
-
   return (
     <div
       className={clsx("flex flex-col w-full gap-6 pb-3", hidden && "hidden")}
