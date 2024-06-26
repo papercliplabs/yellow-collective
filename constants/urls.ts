@@ -6,7 +6,7 @@ export const ETHERSCAN_BASEURL = {
   "999": "https://explorer.zora.energy/",
   "7777777": "https://testnet.explorer.zora.energy/",
   "8453": base.blockExplorers.etherscan.url,
-  "84531": baseGoerli.blockExplorers.etherscan.url,
+  "84532": baseGoerli.blockExplorers.etherscan.url,
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"];
 
 export const SUBGRAPH_ENDPOINT = {
@@ -18,12 +18,12 @@ export const SUBGRAPH_ENDPOINT = {
     "https://api.goldsky.com/api/public/project_clkk1ucdyf6ak38svcatie9tf/subgraphs/nouns-builder-zora-testnet/stable/gn",
   "8453":
     "https://api.goldsky.com/api/public/project_clkk1ucdyf6ak38svcatie9tf/subgraphs/nouns-builder-base-mainnet/stable/gn",
-  "84531":
-    "https://api.goldsky.com/api/public/project_clkk1ucdyf6ak38svcatie9tf/subgraphs/nouns-builder-base-testnet/stable/gn",
+  "84532":
+    "https://api.goldsky.com/api/public/project_clkk1ucdyf6ak38svcatie9tf/subgraphs/nouns-builder-base-sepolia/stable/gn",
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
 export const ETHER_ACTOR_BASEURL = "https://ether.actor";
 export const IPFS_GATEWAY =
   process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://gateway.pinata.cloud/ipfs/";
 
-export const FARCASTER_URL = "https://warpcast.com/~/channel/yellow";
+export const FARCASTER_URL = "https://warpcast.com/~/channel/coppanouns";

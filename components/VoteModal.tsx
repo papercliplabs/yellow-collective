@@ -63,7 +63,7 @@ export default function VoteModal({
         className={`w-full ${
           support === 1
             ? "bg-green-200 text-green-600"
-            : "bg-skin-backdrop hover:bg-skin-muted"
+            : " hover:bg-skin-muted"
         } rounded-xl py-2 mt-6 border border-skin-stroke text-skin-muted`}
       >
         For
@@ -74,7 +74,7 @@ export default function VoteModal({
         className={`w-full ${
           support === 0
             ? "bg-red-200 text-red-600"
-            : "bg-skin-backdrop hover:bg-skin-muted"
+            : "hover:bg-skin-muted"
         } rounded-xl py-2 mt-6 border border-skin-stroke text-skin-muted`}
       >
         Against

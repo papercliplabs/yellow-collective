@@ -8,7 +8,6 @@ import {
   useAccount,
   Address,
 } from "wagmi";
-import { AuctionABI } from "@buildersdk/sdk";
 import { useDebounce } from "@/hooks/useDebounce";
 import Button from "../Button";
 import clsx from "clsx";
@@ -64,7 +63,7 @@ export const PlaceBid = ({
 
   const highestBidBN = BigNumber.from(highestBid);
   const amountIncrease = highestBidBN.div("10");
-  const nextBidAmount = highestBidBN.add(amountIncrease);
+  const nextBidAmount = amountIncrease.isZero() ? BigNumber.from("5000000000000000") : highestBidBN.add(amountIncrease);
 
   const getError = () => {
     const minNextBid = utils.formatEther(nextBidAmount);
@@ -87,7 +86,7 @@ export const PlaceBid = ({
       <ExternalLink href="https://bridge.base.org/deposit">
         <div className="flex flex-row gap-2">
           <Image src="/info-circle.svg" width={20} height={20} alt="" />
-          <span className="font-bold">Bridge to Base</span>
+          <span className="text-[--brand-text-secondary] font-bold">Bridge to Base</span>
         </div>
       </ExternalLink>
       <div className={clsx("flex flex-row flex-wrap gap-4 items-start ")}>
@@ -97,8 +96,8 @@ export const PlaceBid = ({
             type="number"
             onChange={(e) => setBid(e.target.value)}
             className={clsx(
-              "bg-primary h-[59px] rounded-[18px] px-6 py-4 focus:border-accent border-2 outline-none",
-              getError() != undefined && getError() != "" && "border-negative"
+              "bg-primary h-[59px] px-6 py-4 focus:border-white border-2 outline-none",
+              getError() != undefined && getError() != "" && "border-[--brand-red]"
             )}
             placeholder={
               nextBidAmount
@@ -106,7 +105,7 @@ export const PlaceBid = ({
                 : ""
             }
           />
-          {error && <p className="caption text-negative">{getError()}</p>}
+          {error && <p  className="caption text-negative text-[--brand-red]">{getError()}</p>}
         </div>
         <div className="flex flex-col gap-1 justify-center items-center">
           <Button

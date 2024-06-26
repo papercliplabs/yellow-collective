@@ -13,16 +13,12 @@ function getNumber(time: number | string) {
 }
 
 export const TimeDisplayMap = {
-  d: "day",
-  h: "hour",
   m: "minute",
   s: "second",
 };
 
 export const splitDurationSegments = (difference: number) => ({
-  d: Math.floor(difference / (3600 * 24)),
-  h: Math.floor(difference / 3600) % 24,
-  m: Math.floor((difference / 60) % 60),
+  m: Math.floor((difference / 60)),
   s: Math.floor(difference % 60),
 });
 
@@ -38,6 +34,7 @@ const getTimeLeft = (to: number, from?: number) => {
 
   return splitDurationSegments(difference);
 };
+
 
 export const DurationDisplay = ({ duration }: { duration: number }) => {
   const renderSegmentText = (
@@ -75,8 +72,6 @@ export const CountdownDisplay: React.FC<CountdownDisplayProps> = (
   props: CountdownDisplayProps
 ) => {
   const [timeLeft, setTimeLeft] = useState<{
-    d: number;
-    h: number;
     m: number;
     s: number;
   } | null>(
@@ -110,8 +105,6 @@ export const CountdownDisplay: React.FC<CountdownDisplayProps> = (
   }
 
   const timeString = [
-    [timeLeft.d, "d"],
-    [timeLeft.h, "h"],
     [timeLeft.m, "m"],
     [timeLeft.s, "s"],
   ]

@@ -47,8 +47,8 @@ module.exports = {
         },
       },
       backgroundColor: {
-        primary: "#FFFFFF",
-        secondary: "#E9ECEF",
+        primary: "#169C0F",
+        secondary: "#169C0F",
         accent: {
           DEFAULT: "#FBCB07",
           blue: "#0786FB",

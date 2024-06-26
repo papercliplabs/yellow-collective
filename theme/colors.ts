@@ -9,6 +9,12 @@ const withRGB = (val: string): `${string}, ${string}, ${string}` => {
   return `${r}, ${g}, ${b}`;
 };
 
+const withHex = (val: string): string => {
+  const match = val.match(/.{1,2}/g)!;
+  const [r, g, b] = match.map((x) => parseInt(x, 16));
+  return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+};
+
 const fullConfig = resolveConfig(tailwindConfig);
 const colors = fullConfig.theme!.colors as any;
 
@@ -16,7 +22,6 @@ export const lightColors: ThemeColors = {
   fill: withRGB(colors.gray["100"]),
   muted: withRGB(colors.gray["100"]),
   stroke: withRGB(colors.gray["300"]),
-  backdrop: "256, 256, 256",
   "text-base": withRGB(colors.gray["900"]),
   "text-muted": withRGB(colors.gray["500"]),
   "text-inverted": "256, 256, 256",
@@ -31,17 +36,16 @@ export const lightColors: ThemeColors = {
 };
 
 export const darkColors: ThemeColors = {
-  fill: "2, 4, 8",
-  muted: withRGB(colors.neutral["800"]),
-  stroke: withRGB(colors.neutral["700"]),
-  backdrop: withRGB(colors.neutral["900"]),
-  "text-base": "256, 256, 256",
-  "text-muted": withRGB(colors.neutral["400"]),
-  "text-inverted": "2, 4, 8",
-  "text-highlighted": "256, 256, 256",
-  "button-accent": "256, 256, 256",
-  "button-accent-hover": withRGB(colors.neutral["200"]),
-  "button-muted": withRGB(colors.neutral["400"]),
+  fill: withRGB(colors.gray["100"]),
+  muted: withRGB(colors.gray["100"]),
+  stroke: withRGB(colors.gray["300"]),
+  "text-base": withRGB(colors.gray["900"]),
+  "text-muted": withRGB(colors.gray["500"]),
+  "text-inverted": "256, 256, 256",
+  "text-highlighted": withRGB(colors.blue["500"]),
+  "button-accent": withRGB(colors.gray["900"]),
+  "button-accent-hover": withRGB(colors.gray["700"]),
+  "button-muted": withRGB(colors.gray["300"]),
   "proposal-success": withRGB(colors.green["600"]),
   "proposal-danger": withRGB(colors.red["600"]),
   "proposal-muted": withRGB(colors.neutral["500"]),

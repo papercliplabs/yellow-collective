@@ -19,7 +19,7 @@ function BidRow({ bid, tight }: { bid: Bid; tight: boolean }) {
       <WalletInfo address={bid.bidder} size="sm" />
       <ExternalLink href={`${ETHERSCAN_BASEURL}/tx/${bid.transactionHash}`}>
         <div className="flex flex-row gap-2 items-center hover:opacity-70 transition-opacity">
-          <h6 className="text-primary/70">
+          <h6  style={{color: "var(--brand-text-main)"}}>
             Ξ {formatNumber(utils.formatEther(bid.bidAmount || "0"), 3)}
           </h6>
           <Image
@@ -55,12 +55,15 @@ export default function BidHistory({
       })}
       {(bids?.length ?? 0) > numToShow && (
         <Dialog>
-          <DialogTrigger>
+          <DialogTrigger >
             <h6 className="pt-3  text-primary/70 hover:text-primary/50">
               {title}
             </h6>
           </DialogTrigger>
-          <DialogContent className="flex flex-col max-h-[90vh] md:max-h-[70vh]">
+          <DialogContent style={{
+          background: "var(--brand-background-secondary-tran)",
+            // background: "var(--brand-background-secondary)", 
+          color: "var(--brand-text-main)"}} className="flex flex-col max-h-[90vh] md:max-h-[70vh]">
             <DialogHeader>
               <div className="flex flex-row gap-4 items-center border-b-2 p-6">
                 <Image
@@ -68,11 +71,11 @@ export default function BidHistory({
                   width={64}
                   height={64}
                   alt=""
-                  className="rounded-xl border-transparent/10 border-2"
+                  className=" border-transparent/10 border-2"
                 />
                 <div className="flex flex-col items-start">
-                  <h6 className="text-secondary">Bids for</h6>
-                  <h5>Collective Noun #{parseInt(tokenId, 16)}</h5>
+                  <h6 className="text-[--brand-text-fourth]">Bids for</h6>
+                  <h5>Coppa Noun #{parseInt(tokenId, 16)}</h5>
                 </div>
               </div>
             </DialogHeader>
