@@ -8,8 +8,10 @@ import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { parse } from "graphql";
 import { GraphQLClient, gql } from "graphql-request";
 import { TOKEN_CONTRACT } from "constants/addresses";
+import MainnetProvider from "@/utils/MainnetProvider";
 
 const { token } = BuilderSDK.connect({ signerOrProvider: DefaultProvider });
+const { token: mainnetToken } = BuilderSDK.connect({ signerOrProvider: MainnetProvider });
 
 export type ContractInfo = {
   name: string;
@@ -116,6 +118,20 @@ export const getBalanceOf = async ({
   user: `0x${string}`;
 }) => {
   const tokenContract = token({
+    address,
+  });
+
+  return await tokenContract.balanceOf(user);
+};
+
+export const getMainnetBalanceOf = async ({
+  address,
+  user,
+}: {
+  address: `0x${string}`;
+  user: `0x${string}`;
+}) => {
+  const tokenContract = mainnetToken({
     address,
   });
 
