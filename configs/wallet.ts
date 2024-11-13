@@ -18,7 +18,7 @@ const selectedChain = {
   "84532": baseSepolia,
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
-export const RPC_URL = {
+export const RPC_URLS: { [chainId: string]: string } = {
   "1": `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
   "5": `https://eth-goerli.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
   "999": "https://testnet.rpc.zora.energy",
@@ -26,7 +26,10 @@ export const RPC_URL = {
   "8453": `https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
   "84531": `https://base-goerli.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
   "84532": `https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
-}[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
+};
+
+export const MAINNET_RPC_URL = RPC_URLS["1"];
+export const RPC_URL = RPC_URLS[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
 export type ChainId =
   | "1"
